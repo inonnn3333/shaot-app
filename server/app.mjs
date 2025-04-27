@@ -34,8 +34,13 @@ app.get('/', (req, res) => {
 });
 
 // הפעלת השרת
-app.listen(process.env.PORT, () => {
-    console.log(`Running on http://localhost:${process.env.PORT}`);
+// app.listen(process.env.PORT, () => {
+//     console.log(`Running on http://localhost:${process.env.PORT}`);
+// });
+const PORT = process.env.PORT || 5555;
+
+app.listen(PORT, () => {
+    console.log(`Running on http://localhost:${PORT}`);
 });
 
 import ('./req/req.mjs');
