@@ -1,0 +1,10 @@
+$primary-color: #A067EA;
+$primary-color2: #F1E4FF;
+$primary-color3: #F1E4FF;
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

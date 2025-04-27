@@ -1,0 +1,15 @@
+BE:
+    - Fix Date and hour format
+    - Work on Schema
+    - Add a premisions
+    - Add a validation
+
+FE:
+    - Add an useEffect to check if in DB there a date with the same date. if its true, show a message and navigate to My-Board component.
+    - Add a vaildation
+    - Change a date picker
+    - Change a time picker
+    V Fix the scroll
+    - Add a loader
+    - Add an Indicators for user actions
+    - Add the information in local storage.
