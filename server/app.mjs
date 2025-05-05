@@ -37,10 +37,11 @@ app.get('/', (req, res) => {
 // app.listen(process.env.PORT, () => {
 //     console.log(`Running on http://localhost:${process.env.PORT}`);
 // });
-const PORT = process.env.PORT || 5555;
+// const PORT = process.env.PORT || 5555;
+const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
-    console.log(`Running on http://localhost:${PORT}`);
+    console.log(`Running on ${PORT}`);
 });
 
 import ('./req/req.mjs');
