@@ -1,13 +1,11 @@
+export const calculateWorkHours = (start, end) => {
+    const diffMs = new Date(end) - new Date(start); // הפרש במילישניות
+    const totalMinutes = Math.floor(diffMs / (1000 * 60)); // דקות
 
-export const calculateWorkHours = (startTime, endTime) => {
-    
-    const start = new Date(startTime);
-    const end = new Date(endTime);
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
 
-    // חישוב ההפרש במילישניות -> המרה לשעות
-
-
-    const diffMs = end - start; // הפרש במילישניות  
-    const hoursWorked = diffMs / (1000 * 60 * 60); // ממירים לשעות    
-    return hoursWorked; 
+    if (minutes === 0) return `${hours} שעות`;
+    if (hours === 0) return `${minutes} דקות`;
+    return `${hours} שעות ו־${minutes} דקות`;
 };
