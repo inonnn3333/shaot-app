@@ -5,6 +5,7 @@ import EditItem from './EditItem.jsx';
 import useWorkDays from '../hooks/useWorkDays.js';
 import hoursFormatService from '../services/hoursFormat.js';
 import dateFormatService from '../services/dateFormat.js';
+import Loader from '../loaders/Loader.jsx';
 
 
 const MyBoard = () => {
@@ -21,7 +22,7 @@ const MyBoard = () => {
         return num.toString(); // מחזיר כפי שהוא אם לא 4 ספרות
     }
 
-    if (loading) return <p>🔄 טוען נתונים...</p>;
+    if (loading) return (<Loader />);
     // if (error) return <p>❌ שגיאה בטעינת הנתונים: {error}</p>;
     // if (!data.length) return <p>⚠ אין נתונים זמינים</p>;
 
