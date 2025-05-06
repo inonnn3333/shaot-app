@@ -8,6 +8,8 @@ const api = axios.create({
     headers: { 'Content-Type': 'application/json' },
 });
 
+
+
 const getAllWorkDays = async () => {
     const response = await api.get('/all-data');
     
@@ -27,10 +29,17 @@ const EditWorkDay = async (workDay) => {
     await api.put(`/edit-data/${workDay.date}`, workDay);
 }
 
+const getCurrentMonthDaysWork = async () => {
+    const response = await api.get('/data-this-month');
+    
+    return response.data;
+}
+
 const apiService = {
     getAllWorkDays,
     addWorkDay,
-    EditWorkDay
+    EditWorkDay,
+    getCurrentMonthDaysWork
 };
 
 export default apiService; 

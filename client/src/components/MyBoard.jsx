@@ -8,7 +8,7 @@ import dateFormatService from '../services/dateFormat.js';
 
 
 const MyBoard = () => {
-    const { data } = useWorkDays();
+    const { data, loading } = useWorkDays();
     const [ editingItem, setEditingItem ] = useState(null);
     const [ filterOpen, setFilterOpen ] = useState(null);
     const [ startDate, setStartDate ] = useState(null);
@@ -21,17 +21,16 @@ const MyBoard = () => {
         return num.toString(); // מחזיר כפי שהוא אם לא 4 ספרות
     }
 
-    // if (loading) return <p>🔄 טוען נתונים...</p>;
+    if (loading) return <p>🔄 טוען נתונים...</p>;
     // if (error) return <p>❌ שגיאה בטעינת הנתונים: {error}</p>;
     // if (!data.length) return <p>⚠ אין נתונים זמינים</p>;
-
 
     return (
         <div className='myBoard-container'>
             <div className='myBoard-header'>
                 <div className='myBoard-header-details'>
-                    <h3>{calculateWorkingHours()} שעות</h3>
-                    <h3>{formatNumber(calculateMoney())} ש"ח</h3>
+                    <h3>{calculateWorkingHours(data)} שעות</h3>
+                    <h3>{formatNumber(calculateMoney(data))} ש"ח</h3>
                     <button onClick={() => setFilterOpen(!filterOpen)}>
                         <img src="images/filter-icon.png" alt="close-icon" />
                     </button>

@@ -1,6 +1,8 @@
 import { app } from "../app.mjs";
 import getTodayIsraelHour from "../functions/getTodayIsraelHour.js";
 import { WorkDaySchema } from "../models/work-day.model.mjs";
+import moment from 'moment-timezone';
+
 // import moment from 'moment';
 
 app.get('/all-data', async(req, res) => {
@@ -81,5 +83,26 @@ app.put('/edit-data/:date', async(req, res) => {
         res.send(updatedWorkDay);
     } catch (err) {
         res.status(500).send("Oops. An error occurred.");
+    }
+});
+
+
+app.get('/data-this-month', async (req, res) => {
+    try {
+        // קביעת התאריכים לפי שעון ישראל
+        const startOfMonth = moment().tz('Asia/Jerusalem').startOf('month').toDate();
+        const endOfMonth = moment().tz('Asia/Jerusalem').endOf('month').toDate();
+
+        const workDays = await WorkDaySchema.find({
+            date: {
+                $gte: startOfMonth,
+                $lte: endOfMonth,
+            },
+        });
+
+        res.send(workDays);
+    } catch (err) {
+        console.error("Error getting current month data:", err.message);
+        res.status(500).send("Server error while retrieving current month data");
     }
 });

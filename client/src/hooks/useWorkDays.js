@@ -8,7 +8,8 @@ const useWorkDays = () => {
 
     const fetchData = async () => {
         try{
-            const workDays = await apiService.getAllWorkDays();
+            // const workDays = await apiService.getAllWorkDays();
+            const workDays = await apiService.getCurrentMonthDaysWork();
             setData(workDays);
         } catch (err) {
             setError(err.message)
