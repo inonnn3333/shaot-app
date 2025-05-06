@@ -1,4 +1,5 @@
-import moment from "moment";
+// import moment from "moment";
+import moment from 'moment-timezone';
 
 const changeHourFormatToFullFormat = (aHour) => {
         const todayDate = moment().format("YYYY-MM-DD"); // קביעת התאריך הנוכחי
@@ -7,10 +8,11 @@ const changeHourFormatToFullFormat = (aHour) => {
         return fullDateTime;
     }
 
+
 const changeHourFormatToFriendlyFormat = (aHour) => {
-    const friendlyHour = moment(aHour).format('HH:mm');
-    return friendlyHour;
-}
+    return moment(aHour).subtract(3, 'hours').format('HH:mm')
+};
+
 
 
 const hoursFormatService = {
