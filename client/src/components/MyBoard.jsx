@@ -31,7 +31,14 @@ const MyBoard = () => {
             return;
         }
 
-        html2pdf().from(element).save();
+        html2pdf().from(element)
+        .set({
+            margin: 1,
+            filename: 'דו״ח_שעות.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'cm', format: 'a4', orientation: 'portrait' }
+        }).save();
     };
 
     if (loading) return (<div className='myBoard-container'><Loader /></div>);
