@@ -7,5 +7,5 @@ export const calculateWorkHours = (start, end) => {
 
     if (minutes === 0) return `${hours} שעות`;
     if (hours === 0) return `${minutes} דקות`;
-    return `${hours} שעות ו־${minutes} דקות`;
+    return `${hours} שע' ו־${minutes} דק'`;
 };

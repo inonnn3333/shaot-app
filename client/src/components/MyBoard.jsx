@@ -7,7 +7,7 @@ import hoursFormatService from '../services/hoursFormat.js';
 import dateFormatService from '../services/dateFormat.js';
 import Loader from '../loaders/Loader.jsx';
 import HtmlToPdf from './HtmlToPdf.jsx';
-
+import html2pdf from 'html2pdf.js';
 
 const MyBoard = () => {
     const { data, loading } = useWorkDays();
@@ -23,6 +23,17 @@ const MyBoard = () => {
         return num.toString(); // מחזיר כפי שהוא אם לא 4 ספרות
     }
 
+    const handleDownloadPDF = () => {
+        const element = document.getElementById('pdf-content');
+        
+        if (!element) {
+            console.error("לא נמצא אלמנט עם id='pdf-content'");
+            return;
+        }
+
+        html2pdf().from(element).save();
+    };
+
     if (loading) return (<div className='myBoard-container'><Loader /></div>);
     // if (error) return <p>❌ שגיאה בטעינת הנתונים: {error}</p>;
     // if (!data.length) return <p>⚠ אין נתונים זמינים</p>;
@@ -33,7 +44,7 @@ const MyBoard = () => {
                 <div className='myBoard-header-details'>
                     <h3>{calculateWorkingHours(data)} שעות</h3>
                     <h3>{formatNumber(calculateMoney(data))} ש"ח</h3>
-                    <button>
+                    <button onClick={handleDownloadPDF}>
                         <img src="images/pdf-icon.png" alt="pdf-icon" />
                     </button>
                     <button onClick={() => setFilterOpen(!filterOpen)}>

@@ -23,8 +23,9 @@ const HtmlToPdf = () => {
         }
         return num.toString(); // מחזיר כפי שהוא אם לא 4 ספרות
     }
+
     return (
-        <div>
+        <div style={{ display: 'none' }}>
             <div id="pdf-content" dir="rtl" style={{ fontFamily: 'Arial, sans-serif', padding: '20px' }}>
             <h2 style={{ textAlign: 'center' }}>דו״ח שעות חודשיות</h2>
 
