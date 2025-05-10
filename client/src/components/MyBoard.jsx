@@ -6,6 +6,7 @@ import useWorkDays from '../hooks/useWorkDays.js';
 import hoursFormatService from '../services/hoursFormat.js';
 import dateFormatService from '../services/dateFormat.js';
 import Loader from '../loaders/Loader.jsx';
+import HtmlToPdf from './HtmlToPdf.jsx';
 
 
 const MyBoard = () => {
@@ -22,7 +23,7 @@ const MyBoard = () => {
         return num.toString(); // מחזיר כפי שהוא אם לא 4 ספרות
     }
 
-    if (loading) return (<Loader />);
+    if (loading) return (<div className='myBoard-container'><Loader /></div>);
     // if (error) return <p>❌ שגיאה בטעינת הנתונים: {error}</p>;
     // if (!data.length) return <p>⚠ אין נתונים זמינים</p>;
 
@@ -32,8 +33,11 @@ const MyBoard = () => {
                 <div className='myBoard-header-details'>
                     <h3>{calculateWorkingHours(data)} שעות</h3>
                     <h3>{formatNumber(calculateMoney(data))} ש"ח</h3>
+                    <button>
+                        <img src="images/pdf-icon.png" alt="pdf-icon" />
+                    </button>
                     <button onClick={() => setFilterOpen(!filterOpen)}>
-                        <img src="images/filter-icon.png" alt="close-icon" />
+                        <img src="images/filter-icon.png" alt="filter-icon" />
                     </button>
                 </div>
             
@@ -56,6 +60,7 @@ const MyBoard = () => {
                 </div>
             )}
             </div>
+            <HtmlToPdf/>
 
             {data.map((d, i)=> (
                 <div className='myBoard-work-details' key={i} onClick={() => setEditingItem(d)} >
@@ -79,7 +84,6 @@ const MyBoard = () => {
                     </div>
                 </div>
             ))}
-
             {editingItem && <EditItem item={editingItem} onClose={() => setEditingItem(null)} />}
         </div>
     )

@@ -17,13 +17,7 @@ const LastScreen = () => {
     const [openDetailes, setOpenDetailes] = useState(false);
     
     const calculateWorkTime = (startTime, endTime) =>  {
-        const time =  calculateWorkHours(startTime, endTime);
-        if (time === 1) {
-            return 'שעה אחת';
-        } else if(time === 2) {
-            return 'שעתיים';
-        } 
-        return `${time} שעות`;   
+        return calculateWorkHours(startTime, endTime);
     } 
 
     const handleSubmit = async (e) => {
