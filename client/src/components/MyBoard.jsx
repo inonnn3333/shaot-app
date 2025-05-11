@@ -11,10 +11,13 @@ import html2pdf from 'html2pdf.js';
 
 const MyBoard = () => {
     const { data, loading } = useWorkDays();
+    const sortedData = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
     const [ editingItem, setEditingItem ] = useState(null);
     const [ filterOpen, setFilterOpen ] = useState(null);
     const [ startDate, setStartDate ] = useState(null);
     const [ endDate, setEndDate ] = useState(null);
+
+    // const [ moreOptionsBtn, setMoreOptionsBtn ] = useState(true);
 
     const formatNumber = (num) => {
         if (num >= 1000 && num < 10000) {
@@ -51,9 +54,6 @@ const MyBoard = () => {
                 <div className='myBoard-header-details'>
                     <h3>{calculateWorkingHours(data)} שעות</h3>
                     <h3>{formatNumber(calculateMoney(data))} ש"ח</h3>
-                    <button onClick={handleDownloadPDF}>
-                        <img src="images/pdf-icon.png" alt="pdf-icon" />
-                    </button>
                     <button onClick={() => setFilterOpen(!filterOpen)}>
                         <img src="images/filter-icon.png" alt="filter-icon" />
                     </button>
@@ -80,7 +80,7 @@ const MyBoard = () => {
             </div>
             <HtmlToPdf/>
 
-            {data.map((d, i)=> (
+            {sortedData.map((d, i)=> (
                 <div className='myBoard-work-details' key={i} onClick={() => setEditingItem(d)} >
                     <div className='myBoard-work-details-date'>{dateFormatService.changeDateFormatToFriendlyFormat(d.date)}</div>
                     <div className='myBoard-work-details-content'>
@@ -102,6 +102,31 @@ const MyBoard = () => {
                     </div>
                 </div>
             ))}
+
+
+            {/* <div className='more-options-btn-container' onClick={() => setMoreOptionsBtn(true)}>
+                {moreOptionsBtn &&
+                    <div>
+                        <select name="" id="">
+                            <option value="">היי
+                                <button onClick={handleDownloadPDF}>
+                                    <img style={{width: "1em"}} src="images/pdf-icon.png" alt="pdf-icon" />
+                                </button>
+                            </option>
+                            <option value="1">
+                                <button>
+                                    <img style={{width: "1em"}} src="images/new-icon.png" alt="newDay-icon" />
+                                </button>
+                            </option>
+                        </select>
+                    </div>
+                }
+            </div> */}
+            <button onClick={handleDownloadPDF}>
+                <img style={{width: "1em"}} src="images/pdf-icon.png" alt="pdf-icon" />
+            </button>
+
+
             {editingItem && <EditItem item={editingItem} onClose={() => setEditingItem(null)} />}
         </div>
     )

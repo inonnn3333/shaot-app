@@ -115,4 +115,26 @@
             }
         }
     }
+
+
+    .more-options-btn-container {
+        cursor: pointer;
+        background-color: #924949;
+        width: 2em;
+        height: fit-content;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        button {
+            width: 2em;
+            margin-top: 1em;
+            border: none;
+            border-radius: 10px;
+            background-color: $primary-color;
+            color: #000000;
+            font-weight: bold;
+        }
+    }
 }
