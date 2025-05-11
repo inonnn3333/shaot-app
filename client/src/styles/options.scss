@@ -1,0 +1,52 @@
+@import './mixin.scss';
+
+.options-container {
+    width: 10em;
+    border-radius: 20px;
+    gap: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    bottom: 1em;
+    left: 1em;
+    position: absolute;
+
+    .options-container-btns {
+        width: 10em;
+        border-radius: 20px;
+        gap: 1em;
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+
+        button {
+            cursor: pointer;
+            width: 3em;
+            height: 3em;
+            border: none;
+            border-radius: 50px;
+            @include flex-center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+
+            img {
+                width: 1.5em;
+            }
+        }
+    }
+
+    .option-container-open {
+        button {
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            width: 3em;
+            height: 3em;
+            border: none;
+            border-radius: 50px;
+            @include flex-center;
+
+            img {
+                width: 1.5em;
+            }
+        }
+    }
+}

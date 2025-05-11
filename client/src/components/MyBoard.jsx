@@ -6,8 +6,8 @@ import useWorkDays from '../hooks/useWorkDays.js';
 import hoursFormatService from '../services/hoursFormat.js';
 import dateFormatService from '../services/dateFormat.js';
 import Loader from '../loaders/Loader.jsx';
-import HtmlToPdf from './HtmlToPdf.jsx';
-import html2pdf from 'html2pdf.js';
+import Options from './Options.jsx';
+
 
 const MyBoard = () => {
     const { data, loading } = useWorkDays();
@@ -16,7 +16,6 @@ const MyBoard = () => {
     const [ filterOpen, setFilterOpen ] = useState(null);
     const [ startDate, setStartDate ] = useState(null);
     const [ endDate, setEndDate ] = useState(null);
-    const [ moreOptionsBtn, setMoreOptionsBtn ] = useState(true);
 
     const formatNumber = (num) => {
         if (num >= 1000 && num < 10000) {
@@ -24,24 +23,6 @@ const MyBoard = () => {
         }
         return num.toString(); // מחזיר כפי שהוא אם לא 4 ספרות
     }
-
-    const handleDownloadPDF = () => {
-        const element = document.getElementById('pdf-content');
-        
-        if (!element) {
-            console.error("לא נמצא אלמנט עם id='pdf-content'");
-            return;
-        }
-
-        html2pdf().from(element)
-        .set({
-            margin: 1,
-            filename: 'דו״ח_שעות.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'cm', format: 'a4', orientation: 'portrait' }
-        }).save();
-    };
 
     if (loading) return (<div className='myBoard-container'><Loader /></div>);
     // if (error) return <p>❌ שגיאה בטעינת הנתונים: {error}</p>;
@@ -77,7 +58,6 @@ const MyBoard = () => {
                 </div>
             )}
             </div>
-            <HtmlToPdf/>
 
             {sortedData.map((d, i)=> (
                 <div className='myBoard-work-details' key={i} onClick={() => setEditingItem(d)} >
@@ -102,27 +82,8 @@ const MyBoard = () => {
                 </div>
             ))}
 
-
-            <div className='more-options-btn-container' onClick={() => setMoreOptionsBtn(true)}>
-                {moreOptionsBtn &&
-                    <div>
-                        <select name="" id="">
-                            <option value="">היי
-                                <button onClick={handleDownloadPDF}>
-                                    <img style={{width: "1em"}} src="images/pdf-icon.png" alt="pdf-icon" />
-                                </button>
-                            </option>
-                            <option value="1">
-                                <button>
-                                    <img style={{width: "1em"}} src="images/new-icon.png" alt="newDay-icon" />
-                                </button>
-                            </option>
-                        </select>
-                    </div>
-                }
-            </div>
-
-
+            <Options />
+            
             {editingItem && <EditItem item={editingItem} onClose={() => setEditingItem(null)} />}
         </div>
     )
