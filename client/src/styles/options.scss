@@ -9,7 +9,7 @@
     justify-content: left;
     bottom: 1em;
     left: 1em;
-    position: absolute;
+    position: fixed;
 
     .options-container-btns {
         width: 10em;
@@ -36,6 +36,7 @@
 
     .option-container-open {
         button {
+            background-color: $primary-color;
             cursor: pointer;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
             width: 3em;

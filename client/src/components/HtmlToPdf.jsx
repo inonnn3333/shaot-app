@@ -9,6 +9,8 @@ import { calculateMoney, calculateWorkingHours } from './calculate/calculateMont
 const HtmlToPdf = () => {
 
     const { data } = useWorkDays();
+    const sortedData = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
+
     const cellStyle = {
         border: '1px solid #999',
         borderRadius: '4px',
@@ -40,7 +42,7 @@ const HtmlToPdf = () => {
                     </tr>
                 </thead>
                 <tbody>
-                {data.map((item, i) => (
+                {sortedData.map((item, i) => (
                     <tr key={i}>
                     <td style={cellStyle}>{dateFormatService.changeDateFormatToFriendlyFormat(item.date)}</td>
                     <td style={cellStyle}>{hoursFormatService.changeHourFormatToFriendlyFormat(item.startWork)}</td>
@@ -51,7 +53,7 @@ const HtmlToPdf = () => {
                 ))}
                 </tbody>
             </table>
-            <p>סה"כ {calculateWorkingHours(data)}</p>
+            <p>סה"כ שעות עבודה: {calculateWorkingHours(data)}</p>
             <p>אז זה יוצא {formatNumber(calculateMoney(data))} ש"ח</p>
         </div>
 </div>
