@@ -16,8 +16,7 @@ const MyBoard = () => {
     const [ filterOpen, setFilterOpen ] = useState(null);
     const [ startDate, setStartDate ] = useState(null);
     const [ endDate, setEndDate ] = useState(null);
-
-    // const [ moreOptionsBtn, setMoreOptionsBtn ] = useState(true);
+    const [ moreOptionsBtn, setMoreOptionsBtn ] = useState(true);
 
     const formatNumber = (num) => {
         if (num >= 1000 && num < 10000) {
@@ -104,7 +103,7 @@ const MyBoard = () => {
             ))}
 
 
-            {/* <div className='more-options-btn-container' onClick={() => setMoreOptionsBtn(true)}>
+            <div className='more-options-btn-container' onClick={() => setMoreOptionsBtn(true)}>
                 {moreOptionsBtn &&
                     <div>
                         <select name="" id="">
@@ -121,10 +120,7 @@ const MyBoard = () => {
                         </select>
                     </div>
                 }
-            </div> */}
-            <button onClick={handleDownloadPDF}>
-                <img style={{width: "1em"}} src="images/pdf-icon.png" alt="pdf-icon" />
-            </button>
+            </div>
 
 
             {editingItem && <EditItem item={editingItem} onClose={() => setEditingItem(null)} />}
