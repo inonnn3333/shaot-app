@@ -7,6 +7,7 @@ import hoursFormatService from '../services/hoursFormat.js';
 import dateFormatService from '../services/dateFormat.js';
 import Loader from '../loaders/Loader.jsx';
 import Options from './Options.jsx';
+import Filter from './Filter.jsx';
 
 
 const MyBoard = () => {
@@ -14,8 +15,6 @@ const MyBoard = () => {
     const sortedData = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
     const [ editingItem, setEditingItem ] = useState(null);
     const [ filterOpen, setFilterOpen ] = useState(null);
-    const [ startDate, setStartDate ] = useState(null);
-    const [ endDate, setEndDate ] = useState(null);
 
     const formatNumber = (num) => {
         if (num >= 1000 && num < 10000) {
@@ -38,25 +37,7 @@ const MyBoard = () => {
                         <img src="images/filter-icon.png" alt="filter-icon" />
                     </button>
                 </div>
-            
-
-            {filterOpen && (
-                <div className='myBoard-filter-container'>
-                    <form className="filter-form">
-                    <div className="filter-div">
-                        <label htmlFor="">מ:</label>
-                        <input type="date" value={startDate} onChange={(e) => {setStartDate(e.target.value)}} />
-                    </div>
-                    <div className="filter-div">
-                        <label htmlFor="">עד:</label>
-                        <input type="date" value={endDate} onChange={(e) => {setEndDate(e.target.value)}}/>
-                    </div>
-                    <div className="filter-btn-div">
-                        <button>סינון</button>
-                    </div>
-                </form>
-                </div>
-            )}
+                {filterOpen && (<Filter/>)}       
             </div>
 
             {sortedData.map((d, i)=> (
