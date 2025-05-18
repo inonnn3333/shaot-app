@@ -37,7 +37,7 @@ const MyBoard = () => {
                         <img src="images/filter-icon.png" alt="filter-icon" />
                     </button>
                 </div>
-                {filterOpen && (<Filter/>)}       
+                {filterOpen && (<Filter/>)}    
             </div>
 
             {sortedData.map((d, i)=> (
