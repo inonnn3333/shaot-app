@@ -40,7 +40,7 @@ const MyBoard = () => {
                 </div>
                 <div className='myBoard-header-details'>
                     <h2>{formatNumber(calculateMoney(data))} &#8362;</h2>
-                    <h3>{calculateWorkingHours(data)} שעות</h3>
+                    <h4>{calculateWorkingHours(data)} שעות</h4>
                 </div>
             </div>
 
