@@ -13,7 +13,8 @@ const Header = () => {
                 <img src="images/home-icon.png" alt="arrow-details-up" />
             </button>
             ):
-            (<button onClick={() =>{navigate('/my-board')}} >
+            (<button onClick={() =>{navigate('/my-board')}}
+            style={{ backgroundColor: location.pathname === '/my-board' ? '#A067EA' : '#ffffff60' }} >
                 <img src="images/details-icon.png" alt="arrow-details-up" />
             </button>
             )}
