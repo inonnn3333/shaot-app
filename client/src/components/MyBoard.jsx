@@ -29,16 +29,32 @@ const MyBoard = () => {
 
     return (
         <div className='myBoard-container'>
+
+
+
             <div className='myBoard-header'>
-                <div className='myBoard-header-details'>
-                    <h3>{calculateWorkingHours(data)} שעות</h3>
-                    <h3>{formatNumber(calculateMoney(data))} ש"ח</h3>
-                    <button onClick={() => setFilterOpen(!filterOpen)}>
-                        <img src="images/filter-icon.png" alt="filter-icon" />
+                <div className='myBoard-header-newDay'>
+                    <button onClick={() => setEditingItem({})}>
+                        {/* <img src="images/plus-icon.png" alt="arrow-details-up" /> */}יום חדש
                     </button>
                 </div>
-                {filterOpen && (<Filter/>)}    
+                <div className='myBoard-header-details'>
+                    <h2>{formatNumber(calculateMoney(data))} &#8362;</h2>
+                    <h3>{calculateWorkingHours(data)} שעות</h3>
+                </div>
             </div>
+
+
+
+
+            <div className='myBoard-work-details-container'>
+
+
+
+                    <div onClick={() => setFilterOpen(!filterOpen)} className='myBoard-filter-btn'>
+                        <img src="images/filter-icon.png" alt="filter-icon" />
+                    </div>
+                {filterOpen && (<Filter/>)}    
 
             {sortedData.map((d, i)=> (
                 <div className='myBoard-work-details' key={i} onClick={() => setEditingItem(d)} >
@@ -62,6 +78,10 @@ const MyBoard = () => {
                     </div>
                 </div>
             ))}
+            </div>
+
+
+
 
             <Options />
             

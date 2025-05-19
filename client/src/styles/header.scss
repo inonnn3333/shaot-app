@@ -6,6 +6,8 @@
     padding: 1em;
     display: flex;
     justify-content: space-between;
+    background-color: $primary-color;
+    border-radius: 0 0 10px 10px;
 
     button {
         all: unset;
@@ -16,5 +18,9 @@
         img {
             width: 1em;
         }
+    }
+
+    p {
+        color: #ffffff;
     }
 }

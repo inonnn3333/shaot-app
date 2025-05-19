@@ -4,114 +4,143 @@
     width: 100%;
     background-color: #ffffff;
     border-radius: 20px;
-    padding: 4em 0.4em 1em 0.4em;
-    gap: 0.3em;
     @include flex-center;
 
     .myBoard-header {
-        width: 80%;
+        width: 100%;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        background-color: #d3d2d2;
-        padding: 0.5em;
-        margin-bottom: 1em;
-        border-radius: 10px;
+        background-color: $primary-color;
+        padding: 5em 2em 7em 2em;
         gap: 1em;
 
-        button {
-            width: 2em;
-            height: 2em;
-            border: none;
-            border-radius: 50px;
-            @include flex-center;
+        .myBoard-header-newDay {
+            width: 6em;
+            display: flex;
+            justify-content: center;
+
+            button {
+                box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+                width: 6em;
+                height: 2em;
+                border: none;
+                border-radius: 5px;
+                color: $primary-color;
+            }
+        }
+
+        .myBoard-header-details {
+            // width: 10em;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+
+            // עובי גופן
+            h2,
+            h3 {
+                font-weight: 100;
+                color: #ffffff;
+                letter-spacing: 0.1em;
+            }
+        }
+
+    }
+
+    .myBoard-filter-container {
+        width: 90%;
+        border: #000000 1px solid;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1em;
+
+        .filter-form {
+            width: 100%;
+            padding: 0.5em;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+
+
+            .filter-div {
+                width: 40%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .filter-btn-div {
+                width: 20%;
+                height: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-end;
+                gap: 0.5em;
+
+                button {
+                    width: 100%;
+                    margin-top: 1em;
+                    border: none;
+                    border-radius: 10px;
+                    background-color: $primary-color;
+                    color: #000000;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    .myBoard-work-details-container {
+        width: 100%;
+        padding: 0.5em 0 3em 0;
+        margin-top: -4.5em;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 0.4em;
+        background-color: #ffffff;
+        border-radius: 9% 10% 0% 0% / 5% 0% 10% 10%;
+
+        .myBoard-filter-btn {
+            width: 1em;
 
             img {
                 width: 1em;
             }
         }
 
-        .myBoard-header-details {
+        .myBoard-work-details {
             width: 100%;
-            display: flex;
+            @include flex-center;
             flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .myBoard-filter-container {
-            width: 100%;
-            background-color: #ffffff;
-            border-radius: 10px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-
-            .filter-form {
-                width: 100%;
-                flex-wrap: wrap;
-                padding: 0.5em;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-between;
+            gap: 0.5em;
 
 
-                .filter-div {
-                    width: 50%;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                }
+            .myBoard-work-details-date {
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
 
-                .filter-btn-div {
+            .myBoard-work-details-content {
+                width: 80%;
+                background-color: $primary-color2;
+                border-radius: 20px;
+                @include flex-center;
+                padding: 1em 0.4em;
+
+                .myBoard-work-details-inner {
                     width: 100%;
                     display: flex;
-                    flex-direction: row;
+                    justify-content: space-between;
                     align-items: center;
-                    justify-content: flex-end;
-                    gap: 0.5em;
-
-                    button {
-                        width: 100%;
-                        margin-top: 1em;
-                        border: none;
-                        border-radius: 10px;
-                        background-color: $primary-color;
-                        color: #000000;
-                        font-weight: bold;
-                    }
+                    flex-direction: row;
                 }
-            }
-        }
-    }
-
-    .myBoard-work-details {
-        width: 100%;
-        @include flex-center;
-        flex-direction: row;
-        gap: 0.5em;
-
-        .myBoard-work-details-date {
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        .myBoard-work-details-content {
-            width: 80%;
-            background-color: $primary-color2;
-            border-radius: 20px;
-            @include flex-center;
-            padding: 1em 0.4em;
-
-            .myBoard-work-details-inner {
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                flex-direction: row;
             }
         }
     }
