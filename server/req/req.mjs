@@ -11,21 +11,29 @@ app.get('/all-data', async(req, res) => {
 
 
 app.get('/all-data/:date', async (req, res) => {
-        const queryDate = new Date(req.params.date);
-
     try {
-        const data = await WorkDaySchema.findOne({ date: queryDate.date });
-
+        const queryDate = new Date(req.params.date);
+    
+        const startOfDay = new Date(queryDate);
+        startOfDay.setHours(0, 0, 0, 0);
+    
+        const endOfDay = new Date(queryDate);
+        endOfDay.setHours(23, 59, 59, 999);
+    
+        const data = await WorkDaySchema.findOne({
+            date: { $gte: startOfDay, $lte: endOfDay }
+        });
+    
         if (data) {
-            return res.status(200).send("Work day already exists");
-        }
-        else {
+            return res.status(200).send(data); // לא סתם מחרוזת
+        } else {
             return res.status(404).send(null);
         }
-    } catch (err) {
+        } catch (err) {
         res.status(500).send("Oops. An error occurred.");
-    }
+        }
 });
+
 
 
 app.post('/add-data', async(req, res) => {
@@ -109,24 +117,28 @@ app.get('/data-this-month', async (req, res) => {
 });
 
 
-app.post('/add-new-data', async(req, res) => {
+app.post('/add-new-data', async (req, res) => {
     try {
         const info = req.body;
+        const inputDate = new Date(info.date);
+        const now = new Date();
+    
+        // בדיקת תאריך עתידי
+        if (inputDate > now) {
+            return res.status(403).send("תאריך עתידי אינו מותר");
+        }
+    
         const workDay = new WorkDaySchema({
-            date: new Date(info.date),
+            date: inputDate,
             startWork: new Date(info.startWork),
             endWork: new Date(info.endWork),
             comment: info.comment,
         });
-        console.log(workDay);
-        
     
-        // if (await WorkDaySchema.findOne({ date: workDay.date })) {
-        //     return res.status(403).send("Work day already exists");
-        // };
         await workDay.save();
         res.send(workDay);
     } catch (err) {
         res.status(500).send(err);
     }
 });
+  

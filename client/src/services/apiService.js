@@ -36,8 +36,7 @@ const addNewWorkDay = async (workDay) => {
     try {
         await api.post('/add-new-data', workDay);
     } catch (err) {
-        console.log(err.message);
-        return;
+        throw err;
     }
 }
 
