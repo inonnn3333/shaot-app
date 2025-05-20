@@ -30,9 +30,9 @@ const Options = () => {
                     <button onClick={handleDownloadPDF}>
                         <img src="images/pdf-icon.png" alt="pdf-icon" />
                     </button>
-                    <button>
+                    {/* <button>
                         <img src="images/new-icon.png" alt="newDay-icon" />
-                    </button>
+                    </button> */}
                 </div>
             }
             <div className='option-container-open' onClick={() => setIsOpen(!isOpen)}>
