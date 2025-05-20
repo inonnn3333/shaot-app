@@ -8,12 +8,14 @@ import dateFormatService from '../services/dateFormat.js';
 import Loader from '../loaders/Loader.jsx';
 import Options from './Options.jsx';
 import Filter from './Filter.jsx';
+import NewItem from './NewItem.jsx';
 
 
 const MyBoard = () => {
     const { data, loading } = useWorkDays();
     const sortedData = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
     const [ editingItem, setEditingItem ] = useState(null);
+    const [ showNewDayForm ,setShowNewDayForm ] = useState(null)
     const [ filterOpen, setFilterOpen ] = useState(null);
 
     const formatNumber = (num) => {
@@ -34,9 +36,7 @@ const MyBoard = () => {
 
             <div className='myBoard-header'>
                 <div className='myBoard-header-newDay'>
-                    <button onClick={() => setEditingItem({})}>
-                        {/* <img src="images/plus-icon.png" alt="arrow-details-up" /> */}יום חדש
-                    </button>
+                    <button onClick={() => setShowNewDayForm(true)}>יום חדש</button>
                 </div>
                 <div className='myBoard-header-details'>
                     <h2>{formatNumber(calculateMoney(data))} &#8362;</h2>
@@ -86,6 +86,7 @@ const MyBoard = () => {
             <Options />
             
             {editingItem && <EditItem item={editingItem} onClose={() => setEditingItem(null)} />}
+            {showNewDayForm && <NewItem onClose={() => setShowNewDayForm(false)} />}
         </div>
     )
 }

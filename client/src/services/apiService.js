@@ -16,6 +16,13 @@ const getAllWorkDays = async () => {
     return response.data;
 }
 
+
+const getWorkDayByDate = async (date) => {
+    const response = await api.get(`/all-data/${date}`);
+    return response.data;
+};
+
+
 const addWorkDay = async (workDay) => {
     try {
         await api.post('/add-data', workDay);
@@ -25,19 +32,32 @@ const addWorkDay = async (workDay) => {
     }
 }
 
+const addNewWorkDay = async (workDay) => {
+    try {
+        await api.post('/add-new-data', workDay);
+    } catch (err) {
+        console.log(err.message);
+        return;
+    }
+}
+
+
 const EditWorkDay = async (workDay) => {
     await api.put(`/edit-data/${workDay.date}`, workDay);
 }
 
+
 const getCurrentMonthDaysWork = async () => {
     const response = await api.get('/data-this-month');
-    
     return response.data;
 }
 
+
 const apiService = {
     getAllWorkDays,
+    getWorkDayByDate,
     addWorkDay,
+    addNewWorkDay,
     EditWorkDay,
     getCurrentMonthDaysWork
 };

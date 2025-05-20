@@ -14,13 +14,14 @@ app.get('/all-data/:date', async (req, res) => {
         const queryDate = new Date(req.params.date);
 
     try {
-        const data = await WorkDaySchema.findOne({ date: queryDate });
+        const data = await WorkDaySchema.findOne({ date: queryDate.date });
 
-        if (!data) {
-            return res.status(404).send("Date not found");
+        if (data) {
+            return res.status(200).send("Work day already exists");
         }
-
-        res.send(data);
+        else {
+            return res.status(404).send(null);
+        }
     } catch (err) {
         res.status(500).send("Oops. An error occurred.");
     }
@@ -104,5 +105,28 @@ app.get('/data-this-month', async (req, res) => {
     } catch (err) {
         console.error("Error getting current month data:", err.message);
         res.status(500).send("Server error while retrieving current month data");
+    }
+});
+
+
+app.post('/add-new-data', async(req, res) => {
+    try {
+        const info = req.body;
+        const workDay = new WorkDaySchema({
+            date: new Date(info.date),
+            startWork: new Date(info.startWork),
+            endWork: new Date(info.endWork),
+            comment: info.comment,
+        });
+        console.log(workDay);
+        
+    
+        // if (await WorkDaySchema.findOne({ date: workDay.date })) {
+        //     return res.status(403).send("Work day already exists");
+        // };
+        await workDay.save();
+        res.send(workDay);
+    } catch (err) {
+        res.status(500).send(err);
     }
 });
