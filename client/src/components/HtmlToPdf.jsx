@@ -27,7 +27,7 @@ const HtmlToPdf = () => {
     }
 
     return (
-        <div className='htmlToPdf-container'>
+        <div id='pdf-content' className='htmlToPdf-container'>
             <div className="pdf-content">
                 <div className="pdf-content-inner">
                     <h2 style={{ textAlign: 'center' }}>דו״ח שעות עבודה</h2>

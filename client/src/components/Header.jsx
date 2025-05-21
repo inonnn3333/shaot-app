@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 const Header = () => {
     const navigate = useNavigate();
@@ -17,13 +18,7 @@ const Header = () => {
             </button>
             )}
 
-            <p>
-                {new Date().toLocaleDateString('he-IL', {
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
-                })}
-            </p>
+            <p>{moment().format('DD/MM/YYYY')}</p>
 
             <button>
                 <img src="images/setting-icon.png" alt="arrow-details-up" />

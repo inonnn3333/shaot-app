@@ -44,7 +44,7 @@
             // עובי גופן
             h2,
             h4 {
-                font-weight: 100;
+                font-weight: 300;
                 color: #ffffff;
                 letter-spacing: 0.1em;
             }
@@ -113,6 +113,7 @@
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
         z-index: 3;
         margin-top: 9.8em;
+        font-weight: normal;
 
         .myBoard-filter-btn {
             width: 1em;
@@ -130,7 +131,7 @@
 
 
             .myBoard-work-details-date {
-                font-size: 1.2rem;
+                // font-size: 1.2rem;
                 font-weight: bold;
             }
 
@@ -140,6 +141,7 @@
                 border-radius: 20px;
                 @include flex-center;
                 padding: 1em 0.4em;
+                font-weight: 100;
 
                 .myBoard-work-details-inner {
                     width: 100%;
@@ -147,6 +149,7 @@
                     justify-content: space-between;
                     align-items: center;
                     flex-direction: row;
+                    font-weight: 500;
                 }
             }
         }

@@ -76,9 +76,6 @@ const MyBoard = () => {
             ))}
             </div>
 
-
-
-
             <Options />
             
             {editingItem && <EditItem item={editingItem} onClose={() => setEditingItem(null)} />}

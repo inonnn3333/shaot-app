@@ -30,9 +30,6 @@ const Options = () => {
                     <button onClick={handleDownloadPDF}>
                         <img src="images/pdf-icon.png" alt="pdf-icon" />
                     </button>
-                    {/* <button>
-                        <img src="images/new-icon.png" alt="newDay-icon" />
-                    </button> */}
                 </div>
             }
             <div className='option-container-open' onClick={() => setIsOpen(!isOpen)}>
@@ -41,7 +38,7 @@ const Options = () => {
                 </button>
             </div>
             
-            <HtmlToPdf/>
+            <HtmlToPdf />
         </div>
     )
 }
