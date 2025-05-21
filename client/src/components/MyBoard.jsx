@@ -44,11 +44,7 @@ const MyBoard = () => {
                 </div>
             </div>
 
-
-
-
             <div className='myBoard-work-details-container'>
-
 
 
                     <div onClick={() => setFilterOpen(!filterOpen)} className='myBoard-filter-btn'>
