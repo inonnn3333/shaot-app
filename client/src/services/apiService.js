@@ -50,6 +50,10 @@ const getCurrentMonthDaysWork = async () => {
     const response = await api.get('/data-this-month');
     return response.data;
 }
+const getMayDaysWork = async () => {
+    const response = await api.get('/data-may');
+    return response.data;
+}
 
 
 const apiService = {
@@ -58,7 +62,8 @@ const apiService = {
     addWorkDay,
     addNewWorkDay,
     EditWorkDay,
-    getCurrentMonthDaysWork
+    getCurrentMonthDaysWork,
+    getMayDaysWork
 };
 
 export default apiService; 

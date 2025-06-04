@@ -11,14 +11,6 @@ const HtmlToPdf = () => {
     const { data } = useWorkDays();
     const sortedData = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
 
-    // const cellStyle = {
-    //     border: '1px solid #999',
-    //     borderRadius: '4px',
-    //     padding: '8px',
-    //     textAlign: 'center',
-    //     fontSize: '15px',
-    // };
-
     const formatNumber = (num) => {
         if (num >= 1000 && num < 10000) {
             return num.toLocaleString(); // מוסיף פסיק לאלפים
@@ -30,9 +22,9 @@ const HtmlToPdf = () => {
         <div id='pdf-content' className='htmlToPdf-container'>
             <div className="pdf-content">
                 <div className="pdf-content-inner">
-                    <h2 style={{ textAlign: 'center' }}>דו״ח שעות עבודה</h2>
+                    <h2>דו״ח שעות עבודה</h2>
 
-                    <table style={{ width: '100%', borderCollapse: 'collapse', direction: 'rtl' }}>
+                    <table>
                         <thead>
                             <tr>
                                 <th>תאריך</th>

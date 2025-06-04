@@ -98,7 +98,6 @@ app.put('/edit-data/:date', async(req, res) => {
 
 app.get('/data-this-month', async (req, res) => {
     try {
-        // קביעת התאריכים לפי שעון ישראל
         const startOfMonth = moment().tz('Asia/Jerusalem').startOf('month').toDate();
         const endOfMonth = moment().tz('Asia/Jerusalem').endOf('month').toDate();
 
@@ -115,6 +114,28 @@ app.get('/data-this-month', async (req, res) => {
         res.status(500).send("Server error while retrieving current month data");
     }
 });
+
+app.get('/data-may', async (req, res) => {
+    try {
+      // חודש במומנט הוא 0-indexed: 0=Jan … 4=May
+        const startOfMay = moment.tz({ year: moment().year(), month: 4, day: 1 }, 'Asia/Jerusalem')
+                                .startOf('month')
+                                .toDate();
+    
+        const endOfMay   = moment.tz({ year: moment().year(), month: 4, day: 1 }, 'Asia/Jerusalem')
+                                .endOf('month')
+                                .toDate();
+    
+        const workDays = await WorkDaySchema.find({
+            date: { $gte: startOfMay, $lte: endOfMay },
+        });
+    
+        res.send(workDays);
+        } catch (err) {
+        console.error('Error getting May data:', err.message);
+        res.status(500).send('Server error while retrieving May data');
+        }
+}); 
 
 
 app.post('/add-new-data', async (req, res) => {
@@ -141,4 +162,3 @@ app.post('/add-new-data', async (req, res) => {
         res.status(500).send(err);
     }
 });
-  
