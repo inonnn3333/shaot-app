@@ -18,19 +18,6 @@ export const WorkDetailsProvider = ({ children }) => {
         
     }
 
-    // useEffect(() => {
-    //     const today = JSON.parse(localStorage.getItem('startWork'));
-        
-    //     if (today.date === new Date().toLocaleDateString('en-IL')) {
-            
-    //         setStartWork(getFromLocalStorage('startWork'));
-    //         setEndWork(getFromLocalStorage('endWork'));
-    //     }
-    //     else {
-    //         localStorage.clear();
-    //     }
-    // }, []);
-
     return (
         <WorkDetails.Provider value={{ setStartWork, setEndWork, setComment, startWork, endWork, comment, saveInLocalStorage, getFromLocalStorage }}>
             {children}

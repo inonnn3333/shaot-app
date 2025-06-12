@@ -5,6 +5,9 @@
     direction: rtl;
     text-align: center;
     z-index: -100;
+    position: fixed;
+    top: 0;
+
 
     .pdf-content {
         margin-top: 5em;
