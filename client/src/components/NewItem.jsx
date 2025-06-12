@@ -51,7 +51,7 @@ const NewItem = ({ onClose }) => {
             <button onClick={onClose}>
             <img src="images/close-icon.png" alt="close-icon" />
             </button>
-            <div>{date ? dateFormatService.changeDateFormatToFriendlyFormatTonewComp(date) : "הוספת יום חדש"}</div>
+            <div>{date ? dateFormatService.changeDateFormatToFriendlyFormatToEditComp(date) : "הוספת יום חדש"}</div>
         </div>
 
         <div className="newItem-form">
