@@ -115,27 +115,27 @@ app.get('/data-this-month', async (req, res) => {
     }
 });
 
-app.get('/data-may', async (req, res) => {
+app.get('/data-range', async (req, res) => {
     try {
-      // חודש במומנט הוא 0-indexed: 0=Jan … 4=May
-        const startOfMay = moment.tz({ year: moment().year(), month: 4, day: 1 }, 'Asia/Jerusalem')
-                                .startOf('month')
-                                .toDate();
-    
-        const endOfMay   = moment.tz({ year: moment().year(), month: 4, day: 1 }, 'Asia/Jerusalem')
-                                .endOf('month')
-                                .toDate();
-    
-        const workDays = await WorkDaySchema.find({
-            date: { $gte: startOfMay, $lte: endOfMay },
-        });
-    
-        res.send(workDays);
-        } catch (err) {
-        console.error('Error getting May data:', err.message);
-        res.status(500).send('Server error while retrieving May data');
+        const { start, end } = req.query;
+
+        if (!start || !end) {
+            return res.status(400).send('Missing start or end date');
         }
-}); 
+
+        const startDate = new Date(start);
+        const endDate = new Date(end);
+
+        const workDays = await WorkDaySchema.find({
+            date: { $gte: startDate, $lte: endDate },
+        });
+
+        res.send(workDays);
+    } catch (err) {
+        console.error('Error getting range data:', err.message);
+        res.status(500).send('Server error while retrieving data');
+    }
+});
 
 
 app.post('/add-new-data', async (req, res) => {

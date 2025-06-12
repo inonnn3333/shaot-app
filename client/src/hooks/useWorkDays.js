@@ -9,8 +9,7 @@ const useWorkDays = () => {
     const fetchData = async () => {
         try{
             // const workDays = await apiService.getAllWorkDays();
-            // const workDays = await apiService.getCurrentMonthDaysWork();
-            const workDays = await apiService.getMayDaysWork();
+            const workDays = await apiService.getCurrentMonthDaysWork();
             setData(workDays);
         } catch (err) {
             setError(err.message)
@@ -28,11 +27,20 @@ const useWorkDays = () => {
         }
     }
 
+    const handleFilterRange = async (start, end) => {
+        try {
+            const filtered = await apiService.getDaysInRange(start, end);
+            setData(filtered);
+        } catch (err) {
+            console.error("Error fetching filtered data:", err.message);
+        }
+    };
+
     useEffect(() => {
         fetchData();
-    },[])
+    },[]);
 
-    return {data, loading, error, addWorkDay}
+    return {data, loading, error, addWorkDay, handleFilterRange};
 }
 
 export default useWorkDays;

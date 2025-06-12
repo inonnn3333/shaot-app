@@ -50,10 +50,11 @@ const getCurrentMonthDaysWork = async () => {
     const response = await api.get('/data-this-month');
     return response.data;
 }
-const getMayDaysWork = async () => {
-    const response = await api.get('/data-may');
+
+const getDaysInRange = async (startDate, endDate) => {
+    const response = await api.get(`/data-range?start=${startDate}&end=${endDate}`);
     return response.data;
-}
+};
 
 
 const apiService = {
@@ -63,7 +64,7 @@ const apiService = {
     addNewWorkDay,
     EditWorkDay,
     getCurrentMonthDaysWork,
-    getMayDaysWork
+    getDaysInRange
 };
 
 export default apiService; 

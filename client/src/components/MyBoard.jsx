@@ -12,7 +12,7 @@ import NewItem from './NewItem.jsx';
 
 
 const MyBoard = () => {
-    const { data, loading } = useWorkDays();
+    const { data, loading, handleFilterRange } = useWorkDays();
     const sortedData = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
     const [ editingItem, setEditingItem ] = useState(null);
     const [ showNewDayForm ,setShowNewDayForm ] = useState(null)
@@ -50,7 +50,9 @@ const MyBoard = () => {
                     <div onClick={() => setFilterOpen(!filterOpen)} className='myBoard-filter-btn'>
                         <img src="images/filter-icon.png" alt="filter-icon" />
                     </div>
-                {filterOpen && (<Filter/>)}    
+                {filterOpen && (<Filter onFilter={handleFilterRange} />)}  
+                
+                {!data.length && <p>⚠ אין עדיין נתונים</p>}
 
             {sortedData.map((d, i)=> (
                 <div className='myBoard-work-details' key={i} onClick={() => setEditingItem(d)} >
