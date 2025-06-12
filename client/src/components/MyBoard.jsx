@@ -6,7 +6,6 @@ import useWorkDays from '../hooks/useWorkDays.js';
 import hoursFormatService from '../services/hoursFormat.js';
 import dateFormatService from '../services/dateFormat.js';
 import Loader from '../loaders/Loader.jsx';
-// import Options from './Options.jsx';
 import Filter from './Filter.jsx';
 import NewItem from './NewItem.jsx';
 import HtmlToPdf from './HtmlToPdf.jsx';
@@ -96,8 +95,6 @@ const MyBoard = () => {
                 </div>
             ))}
             </div>
-
-            {/* <Options /> */}
             
             {editingItem && <EditItem item={editingItem} onClose={() => setEditingItem(null)} />}
             {showNewDayForm && <NewItem onClose={() => setShowNewDayForm(false)} />}
@@ -108,7 +105,7 @@ const MyBoard = () => {
                     <img src="images/pdf-icon.png" alt="pdf-icon" />
                 </button>
             </div>
-            
+
             {<HtmlToPdf />}
         </div>
     )
