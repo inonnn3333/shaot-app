@@ -4,7 +4,7 @@ import html2pdf from 'html2pdf.js';
 
 
 const Options = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    // const [isOpen, setIsOpen] = useState(false);
     const handleDownloadPDF = () => {
             const element = document.getElementById('pdf-content');
             
@@ -24,7 +24,12 @@ const Options = () => {
 
     return (
         <div className='options-container'>
-            {isOpen && 
+            <div className='options-container-btns'>
+                <button onClick={handleDownloadPDF}>
+                    <img src="images/pdf-icon.png" alt="pdf-icon" />
+                </button>
+            </div>
+            {/* {isOpen && 
                 <div className='options-container-btns'>
                     <button onClick={handleDownloadPDF}>
                         <img src="images/pdf-icon.png" alt="pdf-icon" />
@@ -35,7 +40,7 @@ const Options = () => {
                 <button>
                     <img src="images/plus-icon.png" alt="plus-icon" />
                 </button>
-            </div>
+            </div> */}
             
             <HtmlToPdf />
         </div>

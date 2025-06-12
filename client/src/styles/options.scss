@@ -1,7 +1,6 @@
 @import './mixin.scss';
 
 .options-container {
-    width: 10em;
     border-radius: 20px;
     gap: 1em;
     display: flex;
@@ -22,6 +21,7 @@
 
         button {
             cursor: pointer;
+            background-color: $primary-color;
             width: 3em;
             height: 3em;
             border: none;

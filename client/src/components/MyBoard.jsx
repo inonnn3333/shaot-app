@@ -6,9 +6,11 @@ import useWorkDays from '../hooks/useWorkDays.js';
 import hoursFormatService from '../services/hoursFormat.js';
 import dateFormatService from '../services/dateFormat.js';
 import Loader from '../loaders/Loader.jsx';
-import Options from './Options.jsx';
+// import Options from './Options.jsx';
 import Filter from './Filter.jsx';
 import NewItem from './NewItem.jsx';
+import HtmlToPdf from './HtmlToPdf.jsx';
+import html2pdf from 'html2pdf.js';
 
 
 const MyBoard = () => {
@@ -24,6 +26,23 @@ const MyBoard = () => {
         }
         return num.toString(); // מחזיר כפי שהוא אם לא 4 ספרות
     }
+
+    const handleDownloadPDF = () => {
+        const element = document.getElementById('pdf-content');
+        
+        if (!element) {
+            console.error("לא נמצא אלמנט עם id='pdf-content'");
+            return;
+        }
+
+        html2pdf().from(element)
+        .set({
+            filename: 'דו״ח_שעות.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'cm', format: 'a4', orientation: 'portrait' }
+        }).save();
+    };
 
     if (loading) return (<div className='myBoard-container'><Loader /></div>);
     // if (error) return <p>❌ שגיאה בטעינת הנתונים: {error}</p>;
@@ -78,10 +97,19 @@ const MyBoard = () => {
             ))}
             </div>
 
-            <Options />
+            {/* <Options /> */}
             
             {editingItem && <EditItem item={editingItem} onClose={() => setEditingItem(null)} />}
             {showNewDayForm && <NewItem onClose={() => setShowNewDayForm(false)} />}
+
+
+            <div className='download-btn'>
+                <button onClick={handleDownloadPDF}>
+                    <img src="images/pdf-icon.png" alt="pdf-icon" />
+                </button>
+            </div>
+            
+            {<HtmlToPdf />}
         </div>
     )
 }
