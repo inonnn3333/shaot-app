@@ -29,10 +29,13 @@ const useWorkDays = () => {
 
     const handleFilterRange = async (start, end) => {
         try {
+            setLoading(true);
             const filtered = await apiService.getDaysInRange(start, end);
             setData(filtered);
         } catch (err) {
             console.error("Error fetching filtered data:", err.message);
+        } finally {
+            setLoading(false);
         }
     };
 
