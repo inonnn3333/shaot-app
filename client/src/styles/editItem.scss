@@ -1,12 +1,12 @@
-@import './mixin.scss';
+@use './mixin.scss' as mix;
 
 .editItem-container {
-    @include flex-center;
+    @include mix.flex-center;
     position: fixed;
     width: 95%;
     height: 36em;
     top: 5em;
-    background-color: $primary-color;
+    background-color: mix.$primary-color;
     border-radius: 20px;
     z-index: 4;
 

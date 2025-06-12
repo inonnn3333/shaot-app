@@ -1,10 +1,10 @@
-@import './mixin.scss';
+@use './mixin.scss' as mix;
 
 
 .home-container {
     height: 100vh;
-    background-color: $primary-color;
-    @include flex-center;
+    background-color: mix.$primary-color;
+    @include mix.flex-center;
 
     .details-button {
         all: unset;
@@ -19,7 +19,7 @@
 .startWork-container,
 .endWork-container {
     height: 100%;
-    @include flex-center;
+    @include mix.flex-center;
     gap: 1em;
 
     button {
@@ -39,7 +39,7 @@
     padding: 2em 1em;
     border-radius: 10px;
     background-color: #fff;
-    @include flex-center;
+    @include mix.flex-center;
     gap: 1em;
 
     .details-container {

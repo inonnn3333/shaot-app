@@ -1,4 +1,4 @@
-@import './mixin.scss';
+@use './mixin.scss' as mix;
 
 .header-container {
     position: fixed;
@@ -6,7 +6,7 @@
     padding: 1em;
     display: flex;
     justify-content: space-between;
-    background-color: $primary-color;
+    background-color: mix.$primary-color;
     border-radius: 0 0 10px 10px;
     z-index: 1000;
 

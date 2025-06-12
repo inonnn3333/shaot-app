@@ -1,4 +1,4 @@
-@import './mixin.scss';
+@use './mixin.scss' as mix;
 
 .options-container {
     border-radius: 20px;
@@ -21,12 +21,12 @@
 
         button {
             cursor: pointer;
-            background-color: $primary-color;
+            background-color: mix.$primary-color;
             width: 3em;
             height: 3em;
             border: none;
             border-radius: 50px;
-            @include flex-center;
+            @include mix.flex-center;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
 
             img {
@@ -37,14 +37,14 @@
 
     .option-container-open {
         button {
-            background-color: $primary-color;
+            background-color: mix.$primary-color;
             cursor: pointer;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
             width: 3em;
             height: 3em;
             border: none;
             border-radius: 50px;
-            @include flex-center;
+            @include mix.flex-center;
 
             img {
                 width: 1.5em;
