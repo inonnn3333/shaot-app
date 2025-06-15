@@ -1,15 +1,15 @@
 import React from 'react';
-import useWorkDays from '../hooks/useWorkDays.js';
+// import useWorkDays from '../hooks/useWorkDays.js';
 import dateFormatService from '../services/dateFormat.js';
 import hoursFormatService from '../services/hoursFormat.js';
 import { calculateWorkHours } from './calculate/calculateWorkHours.js';
 import { calculateMoney, calculateWorkingHours } from './calculate/calculateMonthly.js';
 
 
-const HtmlToPdf = () => {
+const HtmlToPdf = ({dataFromMyBoardComponent}) => {
 
-    const { data } = useWorkDays();
-    const sortedData = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
+    // const { data } = useWorkDays();
+    const sortedData = [...dataFromMyBoardComponent].sort((a, b) => new Date(a.date) - new Date(b.date));
 
     const formatNumber = (num) => {
         if (num >= 1000 && num < 10000) {
@@ -50,14 +50,14 @@ const HtmlToPdf = () => {
                 <div className='pdf-summary'>
                     <p>סה"כ   
                         <span>
-                            {calculateWorkingHours(data)}
+                            {calculateWorkingHours(dataFromMyBoardComponent)}
                         </span>
                         שעות עבודה 
                     </p>
 
                     <p>תשלום:  
                         <span>
-                            {formatNumber(calculateMoney(data))}
+                            {formatNumber(calculateMoney(dataFromMyBoardComponent))}
                         </span>
                     ש"ח</p>
                 </div>

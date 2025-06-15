@@ -28,11 +28,14 @@ const MyBoard = () => {
 
     const handleDownloadPDF = () => {
         const element = document.getElementById('pdf-content');
+        console.log(element);
         
         if (!element) {
             console.error("לא נמצא אלמנט עם id='pdf-content'");
             return;
         }
+        // element.style.display = 'block';
+        // element.style.position = 'static';
 
         html2pdf().from(element)
         .set({
@@ -101,12 +104,13 @@ const MyBoard = () => {
 
 
             <div className='download-btn'>
-                <button onClick={handleDownloadPDF}>
+                <button onClick={() => {handleDownloadPDF()}}>
                     <img src="images/pdf-icon.png" alt="pdf-icon" />
                 </button>
             </div>
 
-            {<HtmlToPdf />}
+
+            <HtmlToPdf dataFromMyBoardComponent={data}/>
         </div>
     )
 }
