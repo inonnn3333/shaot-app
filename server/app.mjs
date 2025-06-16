@@ -33,9 +33,9 @@ app.use(cors({
 
 
 // מסלול בסיסי
-app.get('/', (req, res) => {
-    res.send('השרת עובד!');
-});
+// app.get('/', (req, res) => {
+//     res.send('השרת עובד!');
+// });
 
 app.use(express.static(path.join(__dirname, '../client/build')));
 
