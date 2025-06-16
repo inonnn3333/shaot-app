@@ -1,0 +1,42 @@
+$primary-color: #A067EA;
+$primary-color2: #F1E4FF;
+$primary-color3: #F1E4FF;
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+@font-face {
+    font-family: 'Ploni';
+    src: url('../assets/fonts/Ploni-Bold-AAA.woff2') format('woff2'),
+        url('../assets/fonts/Ploni-Bold-AAA.woff') format('woff');
+    font-weight: 800;
+    font-style: bold;
+}
+
+@font-face {
+    font-family: 'Ploni';
+    src: url('../assets/fonts/Ploni-Regular-AAA.woff2') format('woff2'),
+        url('../assets/fonts/Ploni-Regular-AAA.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Ploni';
+    src: url('../assets/fonts/Ploni-Medium-AAA.woff2') format('woff2'),
+        url('../assets/fonts/Ploni-Medium-AAA.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Ploni';
+    src: url('../assets/fonts/Ploni-Ultralight-AAA.woff2') format('woff2'),
+        url('../assets/fonts/Ploni-Ultralight-AAA.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+}
