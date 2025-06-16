@@ -2,12 +2,16 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 async function main() {
     try{
-        // const connection = process.env.NODE_ENV === 'development' ? process.env.MONGO_DB_URL : process.env.ATLAS_URL;
         await mongoose.connect(process.env.MONGO_DB_URL);
         console.log("Database connected");
     } catch (err) {
@@ -33,11 +37,12 @@ app.get('/', (req, res) => {
     res.send('השרת עובד!');
 });
 
-// הפעלת השרת
-// app.listen(process.env.PORT, () => {
-//     console.log(`Running on http://localhost:${process.env.PORT}`);
-// });
-// const PORT = process.env.PORT || 5555;
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
+
 const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
