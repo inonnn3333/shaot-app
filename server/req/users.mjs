@@ -1,25 +1,42 @@
+import { UserSchema } from "../models/users.model.mjs";
+
 export default function registerUsersRoutes(app) {
-    
+
     app.post('/users/login', async (req, res) => {
         const { email, password } = req.body;
 
+        // בדיקה אם שדות חובה קיימים
         if (!email || !password) {
-            return res.status(400).send({ message: "Email and password are required" });
+            return res.status(400).send({ message: "חובה להזין אימייל וסיסמה" });
         }
 
         try {
-            // Here you would typically check the credentials against a database
-            // For demonstration, we assume a successful login
+            // 🔍 שלב א': חיפוש משתמש במסד הנתונים לפי אימייל
+            const user = await UserSchema.findOne({ email });
+
+            // 🧱 שלב ב': בדיקה אם המשתמש קיים
+            if (!user || user.password !== password) {
+                return res.status(401).send({ message: "אימייל או סיסמה שגויים" });
+            }
+
+            
             if (email === "i@gmail.com" && password === "123456") {
-                // sussessful login     
-                res.status(200).send({ message: "Login successful", token: "fake-jwt-token" });
-            }else {
-                // Invalid credentials
-                return res.status(401).send({ message: "Invalid email or password" });
-            }}
-        catch (error) {
-            console.error("Login error:", error);
-            return res.status(500).send({ message: "Internal server error" });
+                return res.status(200).send({
+                    message: "התחברת בהצלחה",
+                    token: "fake-jwt-token",
+                
+                });}
+            // 🔐 שלב ג': בדיקה אם הסיסמה תואמת (כאן דוגמה פשוטה – בהמשך תוכל לשלב bcrypt)
+            // if (user.password !== password) {
+            //     return res.status(401).send({ message: "אימייל או סיסמה שגויים" });
+            // }
+
+            // ✅ התחברות הצליחה – שלח טוקן (כאן טוקן דמיוני, תוכל לשלב jwt אמיתי)
+
+
+        } catch (error) {
+            console.error("שגיאה ב-login:", error);
+            return res.status(500).send({ message: "שגיאת שרת" });
         }
-});
+    });
 }
