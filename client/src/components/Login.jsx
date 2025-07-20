@@ -29,35 +29,43 @@ const Login = () => {
     };
 
     return (
-        <div style={{ maxWidth: 400, paddingTop: "20em" }}>
+        <div className="login-container">
             <div>
-                <img src="" alt="login-bgc-img" />
+                <img src="images/login-bgc-img.png" alt="login-bgc-img" />
             </div>
-            <div>
+            <div className="login-div">
                 <h2>היי</h2>
                 <p>התחבר/י לחשבון שלך</p>
                 <form onSubmit={handleSubmit}>
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="אימייל"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                    />
-                    <br />
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="סיסמה"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
-                    <br />
+                    <div className="input-container">
+                        <img src="images/user-icon.png" alt="login-bgc-iuser-icon" />
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="אימייל"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className="input-container">
+                        <img src="images/lock-icon.png" alt="lock-icon" />
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="סיסמה"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
                     <button type="submit">התחבר/י</button>
                 </form>
                 {error && <p style={{ color: "red" }}>{error}</p>}
+                <p className="register-link">
+                    אין לך חשבון?{" "}
+                    <span onClick={() => navigate("/register")}>הרשמה</span>
+                </p>
             </div>
         
         </div>

@@ -5,26 +5,28 @@ import moment from 'moment';
 const Header = () => {
     const navigate = useNavigate();
     const location = useLocation();
+
+    // הסתרת Header בדף login
+    if (location.pathname === '/login') return null;
+
+    const isMyBoard = location.pathname === '/my-board';
+
     return (
         <div className='header-container'>
-            {location.pathname === '/my-board'
-            ? 
-            (<button onClick={() =>{navigate('/')}}>
-                <img src="images/home-icon.png" alt="arrow-details-up" />
+            <button onClick={() => navigate(isMyBoard ? '/' : '/my-board')}>
+                <img
+                    src={isMyBoard ? "images/home-icon.png" : "images/details-icon.png"}
+                    alt="nav-icon"
+                />
             </button>
-            ):
-            (<button onClick={() =>{navigate('/my-board')}}>
-                <img src="images/details-icon.png" alt="arrow-details-up" />
-            </button>
-            )}
 
             <p>{moment().format('DD/MM/YYYY')}</p>
 
             <button>
-                <img src="images/setting-icon.png" alt="arrow-details-up" />
+                <img src="images/setting-icon.png" alt="settings" />
             </button>
         </div>
-    )
-}
+    );
+};
 
 export default Header;

@@ -1,0 +1,84 @@
+@use './mixin.scss' as mix;
+
+.login-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 3em;
+
+    div img {
+        width: 100%;
+        height: auto;
+    }
+
+    .login-div {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+
+    form {
+        .input-container {
+            width: 100%;
+            border-radius: 15px;
+            padding: 0.5em 1em 0.5em 0.5em;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background-color: #f1e4ff;
+            margin: 1em 0 1em 0;
+
+            img {
+                width: 1em;
+                height: 1em;
+            }
+
+            input {
+                width: 100%;
+                height: 2em;
+                border: none;
+                outline: none;
+                font-size: 1.2em;
+                padding-right: 0.5em;
+                background-color: transparent;
+            }
+
+        }
+
+        button {
+            width: 100%;
+            padding: 1em;
+            margin-top: 1em;
+            border-radius: 30px;
+            background-color: mix.$primary-color;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #d8c3ff;
+                color: #000;
+            }
+        }
+    }
+
+    .register-link {
+        margin-top: 1em;
+
+        span {
+            color: mix.$primary-color;
+            cursor: pointer;
+            text-decoration: underline;
+
+            &:hover {
+                color: #d8c3ff;
+            }
+        }
+    }
+}
