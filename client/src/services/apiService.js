@@ -8,7 +8,16 @@ const api = axios.create({
     headers: { 'Content-Type': 'application/json' },
 });
 
-
+const login = async (email, password) => {
+    try {
+    const response = await api.post('/users/login', { email, password });
+        localStorage.setItem('token', response.data.token);
+        return response.data;
+    }   catch (error) {
+        console.error('Login failed:', error);
+        throw error.response?.data || error.message;
+    }
+};
 
 const getAllWorkDays = async () => {
     const response = await api.get('/all-data');
@@ -59,6 +68,7 @@ const getDaysInRange = async (startDate, endDate) => {
 
 
 const apiService = {
+    login,
     getAllWorkDays,
     getWorkDayByDate,
     addWorkDay,

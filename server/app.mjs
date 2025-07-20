@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import registerRoutes from './req/req.mjs';
+import registerUsersRoutes from './req/users.mjs';
 
 dotenv.config();
 
@@ -37,6 +38,7 @@ app.use(cors({
 
 // ✅ רישום כל הראוטים מהקובץ req.mjs
 registerRoutes(app);
+registerUsersRoutes(app);
 
 // ✅ הגשת קבצי React (build)
 app.use(express.static(path.join(__dirname, './client/build')));
@@ -47,7 +49,7 @@ app.get('*', (req, res) => {
 });
 
 // הרצת השרת
-const PORT = process.env.PORT || 1010;
+const PORT = process.env.PORT ;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
