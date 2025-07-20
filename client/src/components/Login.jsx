@@ -16,17 +16,21 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // const res = await axios.post("http://localhost:1010/users/login", formData);
             const res = await apiService.login(formData.email, formData.password);
-            localStorage.setItem("token", res.data.token);
-            if (res.status === 200) {
+            console.log("🔓 התחברות הצליחה:", res);
+    
+            if (res?.token) {
+                localStorage.setItem("token", res.token);
                 navigate("/");
+            } else {
+                throw new Error("טוקן לא התקבל מהשרת");
             }
         } catch (err) {
-            setError(err.response?.data?.message || "שגיאה בעת ההתחברות");
-            // navigate("/my-board");
+            console.error("❌ Login error:", err);
+            setError(err.message || "שגיאה בעת ההתחברות");
         }
     };
+    
 
     return (
         <div className="login-container">
