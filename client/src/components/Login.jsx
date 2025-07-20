@@ -30,29 +30,36 @@ const Login = () => {
 
     return (
         <div style={{ maxWidth: 400, paddingTop: "20em" }}>
-        <h2>התחברות</h2>
-        <form onSubmit={handleSubmit}>
-            <input
-                type="email"
-                name="email"
-                placeholder="אימייל"
-                value={formData.email}
-                onChange={handleChange}
-                required
-            />
-            <br />
-            <input
-                type="password"
-                name="password"
-                placeholder="סיסמה"
-                value={formData.password}
-                onChange={handleChange}
-                required
-            />
-            <br />
-            <button type="submit">התחבר</button>
-        </form>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+            <div>
+                <img src="" alt="login-bgc-img" />
+            </div>
+            <div>
+                <h2>היי</h2>
+                <p>התחבר/י לחשבון שלך</p>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="אימייל"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                    />
+                    <br />
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="סיסמה"
+                        value={formData.password}
+                        onChange={handleChange}
+                        required
+                    />
+                    <br />
+                    <button type="submit">התחבר/י</button>
+                </form>
+                {error && <p style={{ color: "red" }}>{error}</p>}
+            </div>
+        
         </div>
     );
 };
