@@ -1,7 +1,10 @@
 import axios from 'axios';
 
 
-const API_URL = import.meta.env.PROD ? '' : 'http://localhost:1010';
+// const API_URL = import.meta.env.PROD ? '' : 'http://localhost:1010';
+const API_URL = import.meta.env.PROD
+    ? 'https://shaot-app-server.onrender.com'
+    : 'http://localhost:1010';
 
 const api = axios.create({
     baseURL: API_URL,
