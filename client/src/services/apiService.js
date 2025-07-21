@@ -17,6 +17,14 @@ const login = async (email, password) => {
         throw error.response?.data || { message: error.message };
     }
 };
+const register = async (userData) => {
+    try {
+        const response = await api.post('/users/register', userData);
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || { message: error.message };
+    }
+};
 
 const getAllWorkDays = async () => {
     const response = await api.get('/all-data');
@@ -68,6 +76,7 @@ const getDaysInRange = async (startDate, endDate) => {
 
 const apiService = {
     login,
+    register,
     getAllWorkDays,
     getWorkDayByDate,
     addWorkDay,

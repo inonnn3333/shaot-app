@@ -6,6 +6,7 @@ import { WorkDetailsProvider } from './context/WorkDetails';
 import MyBoard from './components/MyBoard';
 import Header from './components/Header';
 import Login from './components/Login';
+import Register from './components/Register';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Routes>
               <Route path='/' element={<Home/>}></Route>
               <Route path='/login' element={<Login/>}></Route>
+              <Route path='/register' element={<Register/>}></Route>
               <Route path='/my-board' element={<MyBoard/>}></Route>
             </Routes>
           </Router>
