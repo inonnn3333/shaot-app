@@ -21,7 +21,7 @@ const Login = () => {
     
             if (res?.token) {
                 localStorage.setItem("token", res.token);
-                navigate("/");
+                navigate("/home");
             } else {
                 throw new Error("טוקן לא התקבל מהשרת");
             }
