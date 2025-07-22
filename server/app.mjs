@@ -41,7 +41,7 @@ registerRoutes(app);
 registerUsersRoutes(app);
 
 // ✅ הגשת קבצי React (build)
-app.use(express.static(path.join(__dirname, './client/build')));
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 // ✅ כל נתיב שלא תואם → מחזיר index.html של React
 app.get('*', (req, res) => {
