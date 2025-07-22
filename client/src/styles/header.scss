@@ -19,10 +19,34 @@
         img {
             width: 1em;
         }
+
+        .settings-list {
+            position: absolute;
+            top: 100%;
+            left: 1em;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+
+            list {
+                margin: 0;
+                list-style-type: none;
+
+                li {
+                    padding: 0.5em;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: #f1f1f1;
+                    }
+                }
+            }
+        }
     }
 
     p {
         color: #ffffff;
         font-weight: 100;
     }
+
 }

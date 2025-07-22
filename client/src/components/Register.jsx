@@ -33,12 +33,12 @@ const Register = () => {
     };
 
     return (
-        <div className="register-container" style={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
+        <div className="register-container">
             <h2>הרשמה</h2>
             <p>צור את החשבון החדש שלך</p>
-            <form onSubmit={handleSubmit}className="register-form" style={{ marginTop: "4em"}}>
+            <form onSubmit={handleSubmit}className="register-form">
                 <div className="input-container">
-                    {/* <img src="images/user-icon.png" alt="user-icon" /> */}
+                    <img src="images/user-icon.png" alt="user-icon" />
                     <input
                         type="text"
                         name="firstName"
@@ -49,7 +49,7 @@ const Register = () => {
                     />
                 </div>
                 <div className="input-container">
-                    {/* <img src="images/user-icon.png" alt="user-icon" /> */}
+                    <img src="images/user-icon.png" alt="user-icon" />
                     <input
                         type="text"
                         name="lastName"
@@ -60,7 +60,7 @@ const Register = () => {
                     />
                 </div>
                 <div className="input-container">
-                    {/* <img src="images/user-icon.png" alt="user-icon" /> */}
+                    <img src="images/phone-icon.png" alt="phone-icon" />
                     <input
                         type="tel"
                         name="phone"
@@ -71,7 +71,7 @@ const Register = () => {
                     />
                 </div>
                 <div className="input-container">
-                    {/* <img src="images/user-icon.png" alt="user-icon" /> */}
+                    <img src="images/email-icon.png" alt="email-icon" />
                     <input
                         type="email"
                         name="email"
@@ -82,7 +82,7 @@ const Register = () => {
                     />
                 </div>
                 <div className="input-container">
-                    {/* <img src="images/user-icon.png" alt="user-icon" /> */}
+                    <img src="images/lock-icon.png" alt="lock-icon" />
                     <input
                         type="password"
                         name="password"

@@ -1,15 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
 const Header = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const [settingList, setSettingList] = useState(false);
+    const isMyBoard = location.pathname === '/my-board';
 
     // הסתרת Header בדף login
     if (location.pathname === '/login') return null;
+    if (location.pathname === '/register') return null;
 
-    const isMyBoard = location.pathname === '/my-board';
 
     return (
         <div className='header-container'>
@@ -22,8 +24,15 @@ const Header = () => {
 
             <p>{moment().format('DD/MM/YYYY')}</p>
 
-            <button>
+            <button onClick={() => setSettingList(!settingList)}>
                 <img src="images/setting-icon.png" alt="settings" />
+                {settingList && 
+                    <div className='settings-list'>   
+                        <list>
+                            <li onClick={() => navigate('/login')}>התנתק</li>
+                        </list>
+                    </div>
+                }
             </button>
         </div>
     );
