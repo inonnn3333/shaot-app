@@ -1,18 +1,16 @@
 import React, {useState} from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import moment from 'moment';
+import { useAuthContext } from '../context/authContext';
+
 
 const Header = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [settingList, setSettingList] = useState(false);
     const isMyBoard = location.pathname === '/my-board';
+    const { logout } = useAuthContext();
 
-    // כפתור "התנתק" שמסיר את הTOKEN מהlocalStorage
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        navigate('/login');
-    };
     // הסתרת Header בדף login
     if (location.pathname === '/login') return null;
     if (location.pathname === '/register') return null;
@@ -34,7 +32,7 @@ const Header = () => {
                 {settingList && 
                     <div className='settings-list'>   
                         <list>
-                            <li onClick={() => handleLogout()}>התנתק</li>
+                            <li onClick={() => {logout(); navigate('/login')}}>התנתק</li>
                         </list>
                     </div>
                 }

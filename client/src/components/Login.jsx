@@ -2,10 +2,11 @@ import React, { useState } from "react";
 // import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import apiService from "../services/apiService";
+import { useAuthContext } from '../context/authContext';
 
 const Login = () => {
     const navigate = useNavigate();
-
+    const { login } = useAuthContext();
     const [formData, setFormData] = useState({ email: "", password: "" });
     const [error, setError] = useState("");
 
@@ -17,10 +18,12 @@ const Login = () => {
         e.preventDefault();
         try {
             const res = await apiService.login(formData.email, formData.password);
-            console.log("🔓 התחברות הצליחה:", res);
+            login(res.token, res.user);
+            login("יפה מאודדד",res.user);
+            console.log("🔓 התחברות הצליחה:");
     
             if (res?.token) {
-                localStorage.setItem("token", res.token);
+                // localStorage.setItem("token", res.token);
                 navigate("/home");
             } else {
                 throw new Error("טוקן לא התקבל מהשרת");

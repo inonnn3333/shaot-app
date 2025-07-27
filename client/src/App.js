@@ -7,25 +7,27 @@ import MyBoard from './components/MyBoard';
 import Header from './components/Header';
 import Login from './components/Login';
 import Register from './components/Register';
-
+import { AuthProvider } from './context/authContext';
 
 function App() {
   return (
     <div className="app-container">
-      <StepProvider>
-        <WorkDetailsProvider>
-          <Router>
-            <Header/>
-            <Routes>
-              <Route path='/' element={<Navigate to="/login" replace />}></Route>
-              <Route path='/login' element={<Login/>}></Route>
-              <Route path='/register' element={<Register/>}></Route>
-              <Route path='/home' element={<Home/>}></Route>
-              <Route path='/my-board' element={<MyBoard/>}></Route>
-            </Routes>
-          </Router>
-        </WorkDetailsProvider>
-      </StepProvider>
+      <AuthProvider>
+        <StepProvider>
+          <WorkDetailsProvider>
+            <Router>
+              <Header/>
+              <Routes>
+                <Route path='/' element={<Navigate to="/login" replace />}></Route>
+                <Route path='/login' element={<Login/>}></Route>
+                <Route path='/register' element={<Register/>}></Route>
+                <Route path='/home' element={<Home/>}></Route>
+                <Route path='/my-board' element={<MyBoard/>}></Route>
+              </Routes>
+            </Router>
+          </WorkDetailsProvider>
+        </StepProvider>
+      </AuthProvider>
     </div>
   );
 }

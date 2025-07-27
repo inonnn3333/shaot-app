@@ -5,6 +5,7 @@ import StartWork from './stepsComp/StartWork';
 import EndWork from './stepsComp/EndWork';
 import LastScreen from './stepsComp/LastScreen';
 
+
 const Home = () => {
     const { step } = useStep();
 
