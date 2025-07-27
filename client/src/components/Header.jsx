@@ -8,6 +8,11 @@ const Header = () => {
     const [settingList, setSettingList] = useState(false);
     const isMyBoard = location.pathname === '/my-board';
 
+    // כפתור "התנתק" שמסיר את הTOKEN מהlocalStorage
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        navigate('/login');
+    };
     // הסתרת Header בדף login
     if (location.pathname === '/login') return null;
     if (location.pathname === '/register') return null;
@@ -29,7 +34,7 @@ const Header = () => {
                 {settingList && 
                     <div className='settings-list'>   
                         <list>
-                            <li onClick={() => navigate('/login')}>התנתק</li>
+                            <li onClick={() => handleLogout()}>התנתק</li>
                         </list>
                     </div>
                 }

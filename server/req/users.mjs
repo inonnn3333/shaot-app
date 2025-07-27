@@ -1,5 +1,6 @@
 import { UserSchema } from "../models/users.model.mjs";
 import bcrypt from "bcrypt";
+import jwt from 'jsonwebtoken';
 
 export default function registerUsersRoutes(app) {
 
@@ -27,10 +28,24 @@ export default function registerUsersRoutes(app) {
                 return res.status(401).send({ message: "אימייל או סיסמה שגויים" });
             }
 
+
+            const token = jwt.sign(
+                { id: user._id, email: user.email },
+                process.env.JWT_SECRET,
+                { expiresIn: "7d" }
+            );
+
+
             // ✅ התחברות הצליחה
             return res.status(200).send({
                 message: "התחברת בהצלחה",
-                token: "fake-jwt-token",
+                token,
+                user: {
+                    id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    phone: user.phone,
+                }
             });
 
         } catch (error) {
@@ -76,5 +91,6 @@ export default function registerUsersRoutes(app) {
             return res.status(500).send({ message: "שגיאת שרת" });
         }
     });
+
 }
 
