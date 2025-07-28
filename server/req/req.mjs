@@ -1,6 +1,8 @@
 import getTodayIsraelHour from "../functions/getTodayIsraelHour.js";
 import { WorkDaySchema } from "../models/work-day.model.mjs";
 import moment from 'moment-timezone';
+import { authMiddleware } from "../middlewares/auth.mjs";
+
 
 export default function registerRoutes(app) {
 
@@ -32,7 +34,7 @@ export default function registerRoutes(app) {
         }
     });
 
-    app.post('/add-data', async (req, res) => {
+    app.post('/add-data', authMiddleware, async (req, res) => {
         try {
         const info = req.body;
         const workDay = new WorkDaySchema({
@@ -40,6 +42,7 @@ export default function registerRoutes(app) {
             startWork: new Date(info.startWork),
             endWork: new Date(info.endWork),
             comment: info.comment,
+            userId: req.userId
         });
 
         if (await WorkDaySchema.findOne({ date: workDay.date })) {
@@ -86,7 +89,7 @@ export default function registerRoutes(app) {
         }
     });
 
-    app.get('/data-this-month', async (req, res) => {
+    app.get('/data-this-month', authMiddleware, async (req, res) => {
         try {
         const startOfMonth = moment().tz('Asia/Jerusalem').startOf('month').toDate();
         const endOfMonth = moment().tz('Asia/Jerusalem').endOf('month').toDate();
