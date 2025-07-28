@@ -19,7 +19,7 @@ const Login = () => {
         try {
             const res = await apiService.login(formData.email, formData.password);
             login(res.token, res.user);
-            login("יפה מאודדד",res.user);
+            // login("יפה מאודדד",res.user);
             console.log("🔓 התחברות הצליחה:");
     
             if (res?.token) {

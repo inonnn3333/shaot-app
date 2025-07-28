@@ -30,7 +30,7 @@ export default function registerUsersRoutes(app) {
 
 
             const token = jwt.sign(
-                { id: user._id, email: user.email },
+                { id: user._id, email: user.email, name: user.name, phone: user.phone },
                 process.env.JWT_SECRET,
                 { expiresIn: "7d" }
             );
