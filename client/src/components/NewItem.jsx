@@ -3,6 +3,7 @@ import apiService from "../services/apiService.js";
 // import hoursFormatService from '../services/hoursFormat.js';
 import dateFormatService from '../services/dateFormat.js';
 import moment from "moment";
+import { useAuthContext } from '../context/authContext.jsx';
 
 const NewItem = ({ onClose }) => {
     const [date, setDate] = useState("");
@@ -10,6 +11,8 @@ const NewItem = ({ onClose }) => {
     const [endWork, setEndWork] = useState("");
     const [comment, setComment] = useState("");
     const [message, setMessage] = useState("");
+    const { user } = useAuthContext();
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,13 +30,16 @@ const NewItem = ({ onClose }) => {
             return;
         }
         }
-
+        
         try {
+            
+            console.log("יוזר איידי",user.id);
         await apiService.addNewWorkDay({
             date: isoDate,
             startWork: moment(`${isoDate}T${startWork}`).toISOString(),
             endWork: moment(`${isoDate}T${endWork}`).toISOString(),
-            comment
+            comment,
+            // userId: user._id // הוספת userId מההקשר
         });
         setMessage("✅ יום נשמר בהצלחה!");
         } catch (err) {

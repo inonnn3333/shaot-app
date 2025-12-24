@@ -31,9 +31,9 @@ const Header = () => {
                 <img src="images/setting-icon.png" alt="settings" />
                 {settingList && 
                     <div className='settings-list'>   
-                        <list>
+                        <ul>
                             <li onClick={() => {logout(); navigate('/login')}}>התנתק</li>
-                        </list>
+                        </ul>
                     </div>
                 }
             </button>

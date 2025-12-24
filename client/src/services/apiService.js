@@ -7,6 +7,12 @@ const api = axios.create({
     headers: { 'Content-Type': 'application/json' }
 });
 
+api.interceptors.request.use((config) => {
+    const token = localStorage.getItem('token');
+    if (token) config.headers.Authorization = `Bearer ${token}`;
+    return config;
+});
+
 const login = async (email, password) => {
     try {
         const response = await api.post('/users/login', { email, password });
@@ -33,8 +39,14 @@ const getAllWorkDays = async () => {
 
 
 const getWorkDayByDate = async (date) => {
-    const response = await api.get(`/all-data/${date}`);
-    return response.data;
+    try {
+        console.log("🔍 Fetching work day by date:", date);
+        const response = await api.get(`/all-data/${date}`);
+        return response.data;
+    } catch (err) {
+        console.error("Error fetching work day by date:", err.message);
+        throw err;
+    }
 };
 
 
@@ -43,7 +55,7 @@ const addWorkDay = async (workDay) => {
         await api.post('/add-data', workDay);
     } catch (err) {
         console.log(err.message);
-        return;
+        throw err;
     }
 }
 

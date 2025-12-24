@@ -10,29 +10,33 @@ export default function registerRoutes(app) {
         res.send(await WorkDaySchema.find());
     });
 
-    app.get('/all-data/:date', async (req, res) => {
-        try {
-        const queryDate = new Date(req.params.date);
+app.get('/all-data/:date', authMiddleware, async (req, res) => {
+    try {
+    const queryDate = new Date(req.params.date);
 
-        const startOfDay = new Date(queryDate);
-        startOfDay.setHours(0, 0, 0, 0);
+    const startOfDay = new Date(queryDate);
+    startOfDay.setHours(0, 0, 0, 0);
 
-        const endOfDay = new Date(queryDate);
-        endOfDay.setHours(23, 59, 59, 999);
+    const endOfDay = new Date(queryDate);
+    endOfDay.setHours(23, 59, 59, 999);
 
-        const data = await WorkDaySchema.findOne({
-            date: { $gte: startOfDay, $lte: endOfDay }
-        });
+    const data = await WorkDaySchema.findOne({
+        userId: req.userId, // 🛡️ שליפה רק של הנתונים של המשתמש
+        date: { $gte: startOfDay, $lte: endOfDay }
+    });
 
         if (data) {
-            return res.status(200).send(data);
+        return res.status(200).send(data);
         } else {
-            return res.status(404).send(null);
+        return res.status(404).send(null);
         }
-        } catch (err) {
+
+    } catch (err) {
+        console.error("Error fetching data for date:", err.message);
         res.status(500).send("Oops. An error occurred.");
-        }
-    });
+    }
+});
+
 
     app.post('/add-data', authMiddleware, async (req, res) => {
         try {
@@ -89,22 +93,23 @@ export default function registerRoutes(app) {
         }
     });
 
-    app.get('/data-this-month', authMiddleware, async (req, res) => {
+app.get('/data-this-month', authMiddleware, async (req, res) => {
         try {
-        const startOfMonth = moment().tz('Asia/Jerusalem').startOf('month').toDate();
-        const endOfMonth = moment().tz('Asia/Jerusalem').endOf('month').toDate();
+            const startOfMonth = moment().tz('Asia/Jerusalem').startOf('month').toDate();
+            const endOfMonth = moment().tz('Asia/Jerusalem').endOf('month').toDate();
 
-        const workDays = await WorkDaySchema.find({
+            const workDays = await WorkDaySchema.find({
+            userId: req.userId, // ✨ הסינון לפי המשתמש המחובר
             date: {
-            $gte: startOfMonth,
-            $lte: endOfMonth,
+                $gte: startOfMonth,
+                $lte: endOfMonth,
             },
-        });
+            });
 
-        res.send(workDays);
+            res.send(workDays);
         } catch (err) {
-        console.error("Error getting current month data:", err.message);
-        res.status(500).send("Server error while retrieving current month data");
+            console.error("Error getting current month data:", err.message);
+            res.status(500).send("Server error while retrieving current month data");
         }
     });
 
@@ -130,27 +135,112 @@ export default function registerRoutes(app) {
         }
     });
 
-    app.post('/add-new-data', async (req, res) => {
+
+
+    
+    // app.post('/add-new-data', async (req, res) => {
+    //     try {
+    //         // אני רוצה שInfo יכיל את כל הנתונים uןמכןId יכיל את הנתונים של הId
+
+    //     const info = {startWork: req.startWork, endWork: req.endWork, date: req.date, comment: req.comment};
+    //     const userId = req.userId; 
+    //     const inputDate = new Date(info.date);
+    //     const now = new Date();
+
+    //     if (inputDate > now) {
+    //         return res.status(403).send("תאריך עתידי אינו מותר");
+    //     }
+
+    //     const workDay = new WorkDaySchema({
+    //         userId,
+    //         date: inputDate,
+    //         startWork: new Date(info.startWork),
+    //         endWork: new Date(info.endWork),
+    //         comment: info.comment,
+    //     });
+
+    //     await workDay.save();
+    //     res.send(workDay);
+    //     } catch (err) {
+    //     res.status(500).send(err);
+    //     }
+    // });
+
+
+    // הוספת authMiddleware לכאן -- 🛡️
+    // app.post('/add-new-data', authMiddleware, async (req, res) => {
+    //     try {
+    //         // שליפת הנתונים מתוך req.body ולא מ-req ישירות
+    //         const { startWork, endWork, date, comment } = req.body; 
+    //         const userId = req.userId; // עכשיו זה יעבוד כי יש Middleware
+
+    //         const inputDate = new Date(date);
+    //         const now = new Date();
+
+    //         if (inputDate > now) {
+    //             return res.status(403).send("תאריך עתידי אינו מותר");
+    //         }
+
+    //         const workDay = new WorkDaySchema({
+    //             userId, // משויך למשתמש המחובר
+    //             date: inputDate,
+    //             startWork: new Date(startWork),
+    //             endWork: new Date(endWork),
+    //             comment: comment,
+    //         });
+
+    //         await workDay.save();
+    //         res.send(workDay);
+    //     } catch (err) {
+    //         console.error(err); // כדאי להדפיס כדי לראות לוגים בשרת
+    //         res.status(500).send("שגיאה בשמירת הנתונים");
+    //     }
+    // });
+
+    app.post('/add-new-data', authMiddleware, async (req, res) => {
         try {
-        const info = req.body;
-        const inputDate = new Date(info.date);
-        const now = new Date();
+            console.log("--- תחילת שמירת יום עבודה חדש ---");
+            
+            // 1. שליפה נכונה מה-body
+            const { startWork, endWork, date, comment } = req.body;
+            const userId = req.userId; // מגיע מה-Middleware
 
-        if (inputDate > now) {
-            return res.status(403).send("תאריך עתידי אינו מותר");
-        }
+            console.log("נתונים שהתקבלו:", { userId, date, startWork });
 
-        const workDay = new WorkDaySchema({
-            date: inputDate,
-            startWork: new Date(info.startWork),
-            endWork: new Date(info.endWork),
-            comment: info.comment,
+            // 2. בדיקה אם הנתונים הגיעו
+            if (!date || !startWork || !endWork) {
+                return res.status(400).send("חובה להזין תאריך ושעות");
+            }
+
+            const inputDate = new Date(date);
+            const now = new Date();
+
+            if (inputDate > now) {
+                return res.status(403).send("תאריך עתידי אינו מותר");
+            }
+
+            const workDay = new WorkDaySchema({
+                userId,
+                date: inputDate,
+                startWork: new Date(startWork),
+                endWork: new Date(endWork),
+                comment: comment,
+            });
+
+            // 3. הניסיון לשמור
+            await workDay.save();
+            console.log("✅ היום נשמר בהצלחה!");
+            res.send(workDay);
+
+            } catch (err) {
+                // המפתח לפתרון נמצא כאן! זה ידפיס לטרמינל את השגיאה האמיתית
+                console.error("❌ שגיאה בשמירה ל-DB:", err.message);
+                
+                if (err.code === 11000) {
+                    return res.status(500).send("שגיאה: יום זה כבר קיים במערכת (Duplicate Key)");
+                }
+                
+                res.status(500).send("שגיאה פנימית בשרת: " + err.message);
+            }
         });
-
-        await workDay.save();
-        res.send(workDay);
-        } catch (err) {
-        res.status(500).send(err);
-        }
-    });
 }
