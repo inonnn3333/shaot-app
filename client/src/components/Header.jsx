@@ -18,7 +18,7 @@ const Header = () => {
 
     return (
         <div className='header-container'>
-            <button onClick={() => navigate(isMyBoard ? '/' : '/my-board')}>
+            <button onClick={() => navigate(isMyBoard ? '/home' : '/my-board')}>
                 <img
                     src={isMyBoard ? "images/home-icon.png" : "images/details-icon.png"}
                     alt="nav-icon"
@@ -28,7 +28,7 @@ const Header = () => {
             <p>{moment().format('DD/MM/YYYY')}</p>
 
             <button onClick={() => setSettingList(!settingList)}>
-                <img src="images/setting-icon.png" alt="settings" />
+                <img src="images/logout.png" alt="logout-icon" />
                 {settingList && 
                     <div className='settings-list'>   
                         <ul>

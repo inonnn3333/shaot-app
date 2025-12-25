@@ -49,7 +49,7 @@ app.get('/all-data/:date', authMiddleware, async (req, res) => {
             userId: req.userId
         });
 
-        if (await WorkDaySchema.findOne({ date: workDay.date })) {
+        if (await WorkDaySchema.findOne({ date: workDay.date, userId: req.userId })) {
             return res.status(403).send("Work day already exists");
         };
 

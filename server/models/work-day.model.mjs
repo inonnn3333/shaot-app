@@ -11,4 +11,5 @@ const schema = new Schema({
     }
 })
 
+schema.index({ date: 1, userId: 1 }, { unique: true });
 export const WorkDaySchema = mongoose.model("data", schema, "data");
