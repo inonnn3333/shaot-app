@@ -1,8 +1,12 @@
 import axios from 'axios';
 
-const isDevelopment = process.env.NODE_ENV === "development";
+// const isDevelopment = process.env.NODE_ENV === "development";
 
-const API_URL = isDevelopment ? process.env.REACT_APP_API_URL : "";
+// const API_URL = isDevelopment ? process.env.REACT_APP_API_URL : "";
+
+const API_URL = process.env.REACT_APP_API_URL === "development" 
+    ? "http://localhost:1010" 
+    : ""; 
 
 const api = axios.create({
     baseURL: API_URL,
