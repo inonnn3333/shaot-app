@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.6713ffa5.css",
-    "main.js": "/static/js/main.e0bcb31c.js",
+    "main.js": "/static/js/main.84bc8f2b.js",
     "static/js/977.e628ae12.chunk.js": "/static/js/977.e628ae12.chunk.js",
     "static/js/455.9851bb8e.chunk.js": "/static/js/455.9851bb8e.chunk.js",
     "static/js/488.d75c4094.chunk.js": "/static/js/488.d75c4094.chunk.js",
@@ -15,13 +15,13 @@
     "static/media/Ploni-Bold-AAA.woff2": "/static/media/Ploni-Bold-AAA.38a33197eb4956c0bc32.woff2",
     "index.html": "/index.html",
     "main.6713ffa5.css.map": "/static/css/main.6713ffa5.css.map",
-    "main.e0bcb31c.js.map": "/static/js/main.e0bcb31c.js.map",
+    "main.84bc8f2b.js.map": "/static/js/main.84bc8f2b.js.map",
     "977.e628ae12.chunk.js.map": "/static/js/977.e628ae12.chunk.js.map",
     "455.9851bb8e.chunk.js.map": "/static/js/455.9851bb8e.chunk.js.map",
     "488.d75c4094.chunk.js.map": "/static/js/488.d75c4094.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6713ffa5.css",
-    "static/js/main.e0bcb31c.js"
+    "static/js/main.84bc8f2b.js"
   ]
 }
