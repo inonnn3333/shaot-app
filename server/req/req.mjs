@@ -38,61 +38,95 @@ app.get('/all-data/:date', authMiddleware, async (req, res) => {
 });
 
 
-    app.post('/add-data', authMiddleware, async (req, res) => {
-        try {
-        const info = req.body;
-        const workDay = new WorkDaySchema({
-            date: getTodayIsraelHour(),
-            startWork: new Date(info.startWork),
-            endWork: new Date(info.endWork),
-            comment: info.comment,
-            userId: req.userId
-        });
+    // app.post('/add-data', authMiddleware, async (req, res) => {
+    //     try {
+    //     const info = req.body;
+    //     const workDay = new WorkDaySchema({
+    //         date: getTodayIsraelHour(),
+    //         startWork: new Date(info.startWork),
+    //         endWork: new Date(info.endWork),
+    //         comment: info.comment,
+    //         userId: req.userId
+    //     });
 
-        if (await WorkDaySchema.findOne({ date: workDay.date, userId: req.userId })) {
-            return res.status(403).send("Work day already exists");
-        };
+    //     if (await WorkDaySchema.findOne({ date: workDay.date, userId: req.userId })) {
+    //         return res.status(403).send("Work day already exists");
+    //     };
 
-        await workDay.save();
-        res.send(workDay);
-        } catch (err) {
-        res.status(500).send(err);
-        }
-    });
+    //     await workDay.save();
+    //     res.send(workDay);
+    //     } catch (err) {
+    //     res.status(500).send(err);
+    //     }
+    // });
 
-    app.put('/edit-data/:date', async (req, res) => {
-        try {
-        const item = req.body;
-        const workDay = {
-            date: item.date,
-            startWork: item.startWork,
-            endWork: item.endWork,
-            comment: item.comment,
-        }
 
-        const queryDate = new Date(req.params.date);
-        const startOfDay = new Date(queryDate);
-        startOfDay.setHours(0, 0, 0, 0);
 
-        const endOfDay = new Date(queryDate);
-        endOfDay.setHours(23, 59, 59, 999);
+    
+    // app.put('/edit-data/:date', async (req, res) => {
+    //     try {
+    //     const item = req.body;
+    //     const workDay = {
+    //         date: item.date,
+    //         startWork: item.startWork,
+    //         endWork: item.endWork,
+    //         comment: item.comment,
+    //     }
 
-        const updatedWorkDay = await WorkDaySchema.findOneAndUpdate(
-            { date: { $gte: startOfDay, $lte: endOfDay } },
-            workDay,
-            { new: true }
+    //     const queryDate = new Date(req.params.date);
+    //     const startOfDay = new Date(queryDate);
+    //     startOfDay.setHours(0, 0, 0, 0);
+
+    //     const endOfDay = new Date(queryDate);
+    //     endOfDay.setHours(23, 59, 59, 999);
+
+    //     const updatedWorkDay = await WorkDaySchema.findOneAndUpdate(
+    //         { date: { $gte: startOfDay, $lte: endOfDay } },
+    //         workDay,
+    //         { new: true }
+    //     );
+
+    //     if (!updatedWorkDay) {
+    //         return res.status(404).send("Work day not found");
+    //     }
+
+    //     res.send(updatedWorkDay);
+    //     } catch (err) {
+    //     res.status(500).send("Oops. An error occurred.");
+    //     }
+    // });
+
+
+
+app.put('/edit-data/:date', async (req, res) => {
+    try {
+        const { date } = req.params;
+        const updateData = req.body;
+
+        // אם ה-Model שלך מוגדר כמשתנה אחר (למשל 'dbData'), תשנה את השם כאן
+        const result = await WorkDaySchema.findOneAndUpdate(
+            { date: date },
+            { $set: updateData }, // שימוש ב-$set מבטיח שרק השדות שנשלחו יעודכנו
+            { new: true, runValidators: true }
         );
 
-        if (!updatedWorkDay) {
-            return res.status(404).send("Work day not found");
+        if (!result) {
+            console.log("❌ No record found for this date");
+            return res.status(404).json({ message: "Record not found" });
         }
 
-        res.send(updatedWorkDay);
-        } catch (err) {
-        res.status(500).send("Oops. An error occurred.");
-        }
-    });
+        res.status(200).json(result);
 
+    } catch (error) {
+        // אם הגעת לכאן, השרת לא יקרוס (500) אלא ידפיס את השגיאה
+        console.error("🔥 Server Error during update:", error.message);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
+
+    
 app.get('/data-this-month', authMiddleware, async (req, res) => {
         try {
             const startOfMonth = moment().tz('Asia/Jerusalem').startOf('month').toDate();
