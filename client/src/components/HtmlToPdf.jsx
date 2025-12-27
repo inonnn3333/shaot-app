@@ -1,21 +1,18 @@
 import React from 'react';
-// import useWorkDays from '../hooks/useWorkDays.js';
 import dateFormatService from '../services/dateFormat.js';
 import hoursFormatService from '../services/hoursFormat.js';
 import { calculateWorkHours } from './calculate/calculateWorkHours.js';
 import { calculateMoney, calculateWorkingHours } from './calculate/calculateMonthly.js';
 
-
-const HtmlToPdf = ({dataFromMyBoardComponent}) => {
-
-    // const { data } = useWorkDays();
+const HtmlToPdf = ({ dataFromMyBoardComponent }) => {
+    // מיון הנתונים לפי תאריך
     const sortedData = [...dataFromMyBoardComponent].sort((a, b) => new Date(a.date) - new Date(b.date));
 
     const formatNumber = (num) => {
         if (num >= 1000 && num < 10000) {
             return num.toLocaleString(); // מוסיף פסיק לאלפים
         }
-        return num.toString(); // מחזיר כפי שהוא אם לא 4 ספרות
+        return num.toString();
     }
 
     return (
@@ -35,31 +32,34 @@ const HtmlToPdf = ({dataFromMyBoardComponent}) => {
                             </tr>
                         </thead>
                         <tbody>
-                        {sortedData.map((item, i) => (
-                            <tr key={i}>
-                            <td>{dateFormatService.changeDateFormatToFriendlyFormat(item.date)}</td>
-                            <td>{hoursFormatService.changeHourFormatToFriendlyFormat(item.startWork)}</td>
-                            <td>{hoursFormatService.changeHourFormatToFriendlyFormat(item.endWork)}</td>
-                            <td>{calculateWorkHours(item.startWork, item.endWork)}</td>
-                            <td>{item.comment || "----"}</td>
-                            </tr>
-                        ))}
+                            {sortedData.map((item, i) => (
+                                <tr key={i}>
+                                    <td>{dateFormatService.changeDateFormatToFriendlyFormat(item.date)}</td>
+                                    {/* שימוש בפורמט החדש: formatToFriendly */}
+                                    <td>{hoursFormatService.formatToFriendly(item.startWork)}</td>
+                                    <td>{hoursFormatService.formatToFriendly(item.endWork)}</td>
+                                    <td>{calculateWorkHours(item.startWork, item.endWork)}</td>
+                                    <td>{item.comment || "----"}</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
+                
                 <div className='pdf-summary'>
-                    <p>סה"כ   
+                    <p>סה"כ 
                         <span>
-                            {calculateWorkingHours(dataFromMyBoardComponent)}
+                            {" "}{calculateWorkingHours(dataFromMyBoardComponent)}{" "}
                         </span>
                         שעות עבודה 
                     </p>
 
-                    <p>תשלום:  
+                    <p>תשלום: 
                         <span>
-                            {formatNumber(calculateMoney(dataFromMyBoardComponent))}
+                            {" "}{formatNumber(calculateMoney(dataFromMyBoardComponent))}{" "}
                         </span>
-                    ש"ח</p>
+                        ש"ח
+                    </p>
                 </div>
             </div>
         </div>

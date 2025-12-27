@@ -41,7 +41,7 @@ registerRoutes(app);
 registerUsersRoutes(app);
 
 // ✅ הגשת קבצי React (build)
-app.use(express.static(path.join(__dirname, '../client/build')));
+// app.use(express.static(path.join(__dirname, '../client/build')));
 
 // ✅ כל נתיב שלא תואם → מחזיר index.html של React
 // app.get('*', (req, res) => {
@@ -49,9 +49,9 @@ app.use(express.static(path.join(__dirname, '../client/build')));
 // });
 
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+// });
 
 
 // הרצת השרת

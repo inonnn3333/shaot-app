@@ -81,8 +81,8 @@ const MyBoard = () => {
                     <div className='myBoard-work-details-content'>
                         <div className='myBoard-work-details-inner'>
                             <div>
-                                <p>{hoursFormatService.changeHourFormatToFriendlyFormat(d.startWork)}</p>
-                                <p>{hoursFormatService.changeHourFormatToFriendlyFormat(d.endWork)}</p>
+                                <p>{hoursFormatService.formatToFriendly(d.startWork)}</p>
+                                <p>{hoursFormatService.formatToFriendly(d.endWork)}</p>
                             </div>
                             <div>{calculateWorkHours(d.startWork, d.endWork)}</div>
                             
